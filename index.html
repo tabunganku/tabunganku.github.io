@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nara Zaen Tabungan: Wujudkan Impianmu, Raih Masa Depan Cerah!</title>
+    <meta property="og:title" content="Nara Zaen Tabungan: Wujudkan Impianmu, Raih Masa Depan Cerah!">
+    <meta property="og:description" content="Nara Zaen Tabungan, solusi menabung amanah dan mudah untuk masa depan finansialmu. Biaya admin rendah, proses pencairan transparan!">
+    <meta property="og:image" content="https://l.top4top.io/p_3476o5l8p0.png">
+    <meta property="og:url" content="URL_WEBSITE_ANDA_DI_SINI"> <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Nara Zaen Tabungan">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FF5722;
+            --secondary-color: #FFC107;
+            --accent-color: #FFD700;
+            --text-color: #333;
+            --light-text-color: #6D4C41;
+            --success-color: #4CAF50;
+            --danger-color: #F44336;
+            --info-color: #03A9F4;
+            --warning-color: #FF9800;
+            --background-light: rgba(255, 255, 255, 0.95);
+            --background-dark-overlay: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://d.top4top.io/p_34766cbqj0.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Background tetap fixed */
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before, body::after {
+            content: none;
+        }
+
+        /* --- SPLASH SCREEN STYLING --- */
+        #splashScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent; /* Latar belakang transparan */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Pastikan di atas semua elemen */
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        #splashScreen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none; /* Agar tidak bisa diklik saat hidden */
+        }
+
+        #openContentBtn {
+            background-color: transparent; /* Latar belakang tombol transparan */
+            color: white; /* Warna teks (mungkin tidak perlu karena tanpa teks) */
+            border: none;
+            border-radius: 15px; /* Tetap ada untuk bentuk (mungkin tidak terlihat) */
+            padding: 20px 30px; /* Area klik tombol */
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.8em;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            box-shadow: none; /* Hilangkan shadow tombol */
+            transition: transform 0.3s ease;
+            animation: pulse 1.5s infinite alternate; /* Efek berdenyut */
+        }
+
+        #openContentBtn:hover {
+            transform: scale(1.05); /* Efek hover sedikit membesar */
+            box-shadow: none; /* Pastikan tidak ada shadow saat hover */
+            background-color: transparent; /* Jaga tetap transparan saat hover */
+        }
+
+        #openContentBtn img {
+            height: 150px; /* Ukuran gambar logo lebih besar */
+            width: auto;
+            object-fit: contain;
+        }
+
+        #openContentBtn span {
+            display: none; /* Sembunyikan teks */
+            margin-top: 10px;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        /* --- MAIN CONTENT STYLING (Initially Hidden) --- */
+        #mainContent {
+            display: none; /* Default hidden */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 50px; /* Ruang bawah agar tidak terlalu mepet */
+            opacity: 0; /* Untuk animasi fade-in */
+            transition: opacity 0.5s ease-in;
+        }
+
+        #mainContent.visible {
+            opacity: 1;
+            display: flex; /* Atau block, tergantung kebutuhan */
+        }
+
+        /* --- Navbar Styling --- */
+        .navbar {
+            width: 100%;
+            background-color: rgba(255, 240, 150, 0.9);
+            padding: 15px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--secondary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+            transition: padding 0.3s ease-out, align-items 0.3s ease-out, background-color 0.3s ease;
+        }
+
+        .navbar.logged-in {
+            padding: 10px 30px;
+        }
+        .navbar.logged-in .navbar-brand {
+            flex-grow: 0;
+            text-align: left;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-family: 'Fredoka One', cursive;
+            color: var(--primary-color);
+            font-size: 1.5em;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+            margin-bottom: 0;
+            transition: font-size 0.3s ease, margin-bottom 0.3s ease;
+        }
+
+        .navbar-brand .logo-image {
+            height: 55px;
+            margin-right: 10px;
+            object-fit: contain;
+            transition: height 0.3s ease;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 20px;
+            transition: opacity 0.3s ease-out, visibility 0.3s ease-out, height 0.3s ease, padding 0.3s ease, margin 0.3s ease, width 0.3s ease;
+        }
+
+        .navbar-links.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            height: 0;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            width: 0;
+        }
+
+        .navbar-links button {
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        }
+
+        .navbar-links button:hover {
+            background-color: #FFEB3B;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        .navbar-links button .icon {
+            font-size: 1.2em;
+        }
+
+        /* --- Info Section Styling --- */
+        .info-section {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 20px 30px;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 800px;
+            border: 3px solid var(--secondary-color);
+            box-sizing: border-box;
+            font-size: 1.1em;
+            color: var(--text-color);
+            display: none;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .info-section h3 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
+        }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .info-section li {
+            background-color: rgba(255, 250, 200, 0.6);
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .info-section li:hover {
+            background-color: rgba(255, 250, 200, 0.8);
+            transform: translateX(5px);
+        }
+
+        .info-section li i {
+            color: var(--success-color);
+            font-size: 1.2em;
+        }
+
+        /* --- Overlay for Login & Register Form --- */
+        .form-overlay { /* Mengganti .login-overlay menjadi .form-overlay */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--background-dark-overlay);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            display: none;
+        }
+
+        /* --- Login & Register Form Container --- */
+        .form-container { /* Mengganti .login-form-container menjadi .form-container */
+            background-color: var(--background-light);
+            padding: 35px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 450px;
+            max-width: 90%;
+            position: relative;
+            animation: fadeInScale 0.3s ease-out;
+            border: 5px solid var(--secondary-color);
+            box-sizing: border-box;
+        }
+
+        /* Close Button for Login/Register Form */
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
+            font-weight: bold;
+        }
+        .close-button:hover {
+            transform: scale(1.1);
+            color: var(--danger-color);
+        }
+
+        .form-container h2 { /* Menggunakan .form-container */
+            font-family: 'Fredoka One', cursive;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        .form-container input { /* Menggunakan .form-container */
+            width: calc(100% - 40px);
+            padding: 12px 18px;
+            margin-bottom: 18px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            font-size: 1.1em;
+            color: var(--text-color);
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-container input:focus { /* Menggunakan .form-container */
+            border-color: var(--warning-color);
+            box-shadow: 0 0 8px rgba(255, 152, 0, 0.4);
+        }
+
+        .form-button { /* Mengganti .login-button menjadi .form-button */
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 15px;
+            cursor: not-allowed;
+            opacity: 0.7;
+            font-size: 1.2em;
+            font-family: 'Fredoka One', cursive;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-button.unlocked {
+            background-color: var(--success-color);
+            cursor: pointer;
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+        .form-button:hover:not(.unlocked) {
+            opacity: 0.8;
+        }
+        .form-button.unlocked:hover {
+            background-color: #66BB6A;
+            transform: translateY(-4px);
+        }
+        /* Specific styling for register button to differentiate */
+        #registerSubmitBtn {
+             background-color: #66BB6A; /* Green for register */
+             cursor: pointer;
+             opacity: 1;
+        }
+        #registerSubmitBtn:hover {
+            background-color: #7CB342;
+            transform: translateY(-2px);
+        }
+
+
+        #message {
+            margin-top: 18px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        /* --- User Data Display Container --- */
+        #userDataDisplay {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 35px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 450px;
+            border: 5px solid var(--secondary-color);
+            box-sizing: border-box;
+            max-width: 90%;
+            margin-top: 50px;
+            display: none;
+            position: relative;
+            animation: fadeInScale 0.5s ease-out forwards;
+        }
+
+        /* Styling untuk logo gambar di user data display */
+        #userDataDisplay .logo-in-display {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        #userDataDisplay h2 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--success-color);
+            margin-bottom: 15px;
+            font-size: 2.2em;
+        }
+        #userDataDisplay p {
+            font-size: 1.5em;
+            color: #555;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        #userDataDisplay strong {
+            color: var(--primary-color);
+        }
+
+        #userDataDisplay .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        #userDataDisplay .action-buttons button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-family: 'Fredoka One', cursive;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            flex-grow: 1;
+            min-width: 150px;
+        }
+
+        #userDataDisplay .action-buttons .view-history-button {
+            background-color: var(--info-color);
+            color: white;
+        }
+        #userDataDisplay .action-buttons .view-history-button:hover {
+            background-color: #29B6F6;
+            transform: translateY(-2px);
+        }
+
+        #userDataDisplay .action-buttons .logout-button {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        #userDataDisplay .action-buttons .logout-button:hover {
+            background-color: #E53935;
+            transform: translateY(-2px);
+        }
+
+        /* --- New: Withdraw Button Styling --- */
+        #userDataDisplay .action-buttons .withdraw-button {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        #userDataDisplay .action-buttons .withdraw-button:hover {
+            background-color: #FB8C00;
+            transform: translateY(-2px);
+        }
+
+        /* --- Peringkat Menabung Button and Container --- */
+        #rankingContainer {
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+            width: 100%;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        #viewRankingButton {
+            background-color: #8BC34A;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-family: 'Fredoka One', cursive;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #viewRankingButton:hover {
+            background-color: #9CCC65;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
+
+        /* --- History Modal Overlay --- */
+        .history-overlay, .ranking-overlay, .withdraw-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            display: none;
+            animation: fadeInOverlay 0.3s ease-out forwards;
+        }
+
+        .history-modal-content, .ranking-modal-content, .withdraw-modal-content {
+            background-color: var(--background-light);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            width: 600px;
+            max-width: 90%;
+            position: relative;
+            animation: fadeInScale 0.3s ease-out;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 5px solid var(--secondary-color);
+            box-sizing: border-box;
+        }
+        /* Specific styling for withdraw modal to be slightly smaller */
+        .withdraw-modal-content {
+            width: 450px;
+            text-align: center;
+        }
+
+        .ranking-modal-content h3, .history-modal-content h3 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+        .withdraw-modal-content h3 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 2em;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+        }
+
+        .ranking-modal-content h3 .logo-in-modal {
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .history-modal-content table, .ranking-modal-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background-color: #FFFDE7;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .history-modal-content th, .history-modal-content td,
+        .ranking-modal-content th, .ranking-modal-content td {
+            border: 1px solid #FFECB3;
+            padding: 12px;
+            text-align: left;
+            font-size: 1.05em;
+        }
+        .history-modal-content th, .ranking-modal-content th {
+            background-color: #FFD54F;
+            color: var(--light-text-color);
+            font-weight: 600;
+        }
+        .history-modal-content tr:nth-child(even),
+        .ranking-modal-content tr:nth-child(even) {
+            background-color: #FFF8E1;
+        }
+
+        .debit {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+        .kredit {
+            color: var(--danger-color);
+            font-weight: 600;
+        }
+        .history-modal-content .close-button,
+        .ranking-modal-content .close-button,
+        .withdraw-modal-content .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8em;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
+            font-weight: bold;
+        }
+        .close-button:hover {
+            transform: scale(1.1);
+            color: var(--danger-color);
+        }
+
+        /* --- New: Withdrawal Options Styling --- */
+        .withdrawal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .withdraw-option-btn {
+            background-color: var(--success-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-family: 'Fredoka One', cursive;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: 100%;
+        }
+
+        .withdraw-option-btn:hover {
+            background-color: #66BB6A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
+
+        /* --- Keyframe Animations --- */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInOverlay {
+            from {
+                background-color: rgba(0, 0, 0, 0);
+            }
+            to {
+                background-color: rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        /* New: Registration Success Message and Checkmark Animation */
+        #registrationSuccessMessage {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 30px 40px;
+            border-radius: 20px;
+            z-index: 4000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease-out, visibility 0.4s ease-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        #registrationSuccessMessage.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #registrationSuccessMessage .checkmark-icon {
+            font-size: 5em;
+            color: var(--success-color);
+            margin-bottom: 15px;
+            animation: drawCheckmark 0.8s ease-out forwards;
+            position: relative;
+            transform: scale(0.8);
+            opacity: 0;
+        }
+
+        #registrationSuccessMessage.show .checkmark-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        @keyframes drawCheckmark {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+                stroke-dashoffset: 1000;
+            }
+            60% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* For Font Awesome checkmark, we simulate stroke-dashoffset */
+        #registrationSuccessMessage .checkmark-icon::before {
+            display: block;
+            font-family: "Font Awesome 5 Free"; /* Ensure this matches your Font Awesome version */
+            font-weight: 900;
+            content: "\f00c"; /* Unicode for fa-check */
+            -webkit-mask-image: linear-gradient(to right, transparent, black);
+            mask-image: linear-gradient(to right, transparent, black);
+            animation: animateCheckIcon 0.8s ease-out forwards;
+        }
+
+        @keyframes animateCheckIcon {
+            0% {
+                clip-path: inset(0 100% 0 0);
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        #registrationSuccessMessage p {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+            line-height: 1.4;
+        }
+        #registrationSuccessMessage span {
+            font-size: 1.1em;
+            color: #ccc;
+            margin-top: 10px;
+        }
+
+
+        /* Media Queries for Mobile Responsiveness */
+        @media (max-width: 768px) {
+            #openContentBtn {
+                padding: 15px 25px;
+                font-size: 1.4em;
+            }
+            #openContentBtn img {
+                height: 80px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                padding: 15px 15px;
+            }
+            .navbar-brand {
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
+            .navbar-brand .logo-image { height: 45px; }
+            .navbar-links { gap: 10px; width: 100%; justify-content: center; }
+            .navbar-links button { padding: 8px 15px; font-size: 0.95em; }
+
+            .navbar.logged-in {
+                padding: 10px 15px;
+                justify-content: flex-start;
+            }
+            .navbar.logged-in .navbar-brand {
+                flex-grow: 0;
+                text-align: left;
+                margin-bottom: 0;
+            }
+
+            .info-section {
+                padding: 15px 20px;
+                margin-top: 15px;
+                font-size: 1em;
+            }
+            .info-section h3 { font-size: 1.5em; margin-bottom: 10px; }
+            .info-section li { padding: 8px 10px; font-size: 0.9em; }
+
+            .form-container { /* Menggunakan .form-container */
+                width: 95%;
+                padding: 25px 20px;
+                border-width: 3px;
+            }
+            .form-container h2 { font-size: 1.8em; margin-bottom: 20px; } /* Menggunakan .form-container */
+            .form-container input { width: calc(100% - 30px); padding: 10px 15px; font-size: 1em; margin-bottom: 15px; } /* Menggunakan .form-container */
+            .form-button { padding: 10px 20px; font-size: 1.1em; } /* Menggunakan .form-button */
+
+            #userDataDisplay {
+                width: 95%;
+                padding: 25px 20px;
+                margin-top: 30px;
+            }
+            #userDataDisplay .logo-in-display {
+                height: 45px;
+                top: 15px;
+                left: 15px;
+            }
+            #userDataDisplay h2 { font-size: 1.8em; }
+            #userDataDisplay p { font-size: 1.3em; }
+            #userDataDisplay .action-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            #userDataDisplay .action-buttons button {
+                width: 100%;
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+
+            #viewRankingButton {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+
+            .history-modal-content, .ranking-modal-content, .withdraw-modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            .history-modal-content h3, .ranking-modal-content h3 { font-size: 1.6em; }
+            .withdraw-modal-content h3 { font-size: 1.6em; }
+            .ranking-modal-content h3 { font-size: 1.2em; }
+            .ranking-modal-content h3 .logo-in-modal { height: 45px; }
+            .history-modal-content th, .history-modal-content td,
+            .ranking-modal-content th, .ranking-modal-content td {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+            .withdraw-option-btn {
+                font-size: 1.1em;
+                padding: 10px 20px;
+            }
+            #registrationSuccessMessage {
+                padding: 20px 25px;
+            }
+            #registrationSuccessMessage .checkmark-icon {
+                font-size: 4em;
+            }
+            #registrationSuccessMessage p {
+                font-size: 1.2em;
+            }
+            #registrationSuccessMessage span {
+                font-size: 0.9em;
+            }
+        }
+
+        /* Further adjustments for very small screens (e.g., iPhone SE) */
+        @media (max-width: 480px) {
+            #openContentBtn {
+                padding: 10px 20px;
+                font-size: 1.2em;
+            }
+            #openContentBtn img {
+                height: 60px;
+            }
+
+            .navbar-links { flex-direction: column; gap: 5px; }
+            .navbar-links button { width: 100%; }
+
+            .info-section { padding: 10px 15px; }
+            .info-section h3 { font-size: 1.3em; }
+            .info-section li { font-size: 0.85em; }
+
+            .form-container { padding: 20px 15px; } /* Menggunakan .form-container */
+            .form-container h2 { font-size: 1.6em; } /* Menggunakan .form-container */
+            .form-container input { width: calc(100% - 20px); padding: 8px 10px; } /* Menggunakan .form-container */
+            .form-button { padding: 8px 15px; font-size: 1em; } /* Menggunakan .form-button */
+
+            #userDataDisplay { padding: 20px 15px; }
+            #userDataDisplay h2 { font-size: 1.5em; }
+            #userDataDisplay p { font-size: 1.1em; }
+
+            #viewRankingButton {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+
+            .history-modal-content, .ranking-modal-content, .withdraw-modal-content { padding: 15px; }
+            .history-modal-content h3, .ranking-modal-content h3 { font-size: 1.4em; }
+            .withdraw-modal-content h3 { font-size: 1.4em; }
+            .ranking-modal-content h3 { font-size: 1em; }
+            .ranking-modal-content h3 .logo-in-modal { height: 35px; }
+            .history-modal-content th, .history-modal-content td,
+            .ranking-modal-content th, .ranking-modal-content td { padding: 6px; font-size: 0.85em; }
+            .withdraw-option-btn {
+                font-size: 1em;
+                padding: 8px 15px;
+            }
+            #registrationSuccessMessage {
+                padding: 15px 20px;
+            }
+            #registrationSuccessMessage .checkmark-icon {
+                font-size: 3em;
+            }
+            #registrationSuccessMessage p {
+                font-size: 1em;
+            }
+            #registrationSuccessMessage span {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="splashScreen">
+        <button id="openContentBtn">
+            <img src="https://l.top4top.io/p_3476o5l8p0.png" alt="Nara Zaen Logo">
+        </button>
+    </div>
+
+    <div id="mainContent">
+        <nav class="navbar" id="mainNavbar">
+            <div class="navbar-brand">
+                <img src="https://l.top4top.io/p_3476o5l8p0.png" alt="Nara Zaen Logo" class="logo-image">
+                <span>NARA ZAEN TABUNGAN</span>
+            </div>
+            <div class="navbar-links" id="navbarLinks">
+                <button id="navInfoBtn">
+                    <i class="fas fa-info-circle icon"></i> Informasi Tabungan
+                </button>
+                <button id="navLoginBtn">
+                    <i class="fas fa-sign-in-alt icon"></i> Login
+                </button>
+                <button id="navRegisterBtn">
+                    <i class="fas fa-user-plus icon"></i> Daftar
+                </button>
+            </div>
+        </nav>
+
+        <div class="info-section" id="infoSection">
+            <h3>Mengapa Memilih Nara Zaen Tabungan?</h3>
+            <ul>
+                <li><i class="fas fa-hand-holding-usd"></i> Menabung dengan biaya admin rendah</li>
+                <li><i class="fas fa-piggy-bank"></i> Minimum menabung kelipatan Rp1000,-</li>
+                <li><i class="fas fa-lock"></i> Tabungan Nara Zaen amanah 100%</li>
+                <li><i class="fas fa-money-bill-wave"></i> Minimal pencairan tabungan Rp1.000.000,-</li>
+                <li><i class="fas fa-percentage"></i> Setiap pencairan tabungan dikenakan biaya admin 10% dari total tabungan yang akan dicairkan</li>
+            </ul>
+        </div>
+
+        <div id="userDataDisplay">
+            <img src="https://l.top4top.io/p_3476o5l8p0.png" alt="Nara Zaen Logo" class="logo-in-display">
+            <h2 id="welcomeUser"></h2>
+            <p>Saldo Anda saat ini: <strong id="currentSaldo"></strong></p>
+            <div class="action-buttons">
+                <button class="view-history-button" id="viewHistoryBtn"><i class="fas fa-history"></i> Lihat Riwayat Tabungan</button>
+                <button class="withdraw-button" id="withdrawBtn"><i class="fas fa-money-bill-wave"></i> Cairkan Tabungan</button>
+                <button class="logout-button" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Keluar</button>
+            </div>
+        </div>
+
+        <div id="rankingContainer">
+            <button id="viewRankingButton">
+                <i class="fas fa-trophy icon"></i> Lihat Peringkat Menabung
+            </button>
+        </div>
+
+        <div class="form-overlay" id="loginOverlay">
+            <div class="form-container" id="loginFormContainer">
+                <button class="close-button" id="closeLoginBtn">&times;</button>
+                <h2>Selamat Datang!</h2>
+                <input type="text" id="username" placeholder="ID Pengguna">
+                <input type="password" id="password" placeholder="Kata Sandi">
+                <button id="loginBtn" class="form-button">Masuk <span id="lockIcon">🔒</span></button>
+                <p id="message"></p>
+            </div>
+        </div>
+
+        <div class="form-overlay" id="registerOverlay">
+            <div class="form-container" id="registerFormContainer">
+                <button class="close-button" id="closeRegisterBtn">&times;</button>
+                <h2>Buat Akun Baru</h2>
+                <input type="text" id="registerNamaLengkap" placeholder="Nama Lengkap">
+                <input type="text" id="registerUsername" placeholder="ID Pengguna (tanpa spasi)">
+                <input type="password" id="registerPassword" placeholder="Kata Sandi">
+                <input type="tel" id="registerNoWA" placeholder="Nomor WhatsApp (cth: 6281234567890)">
+                <button id="registerSubmitBtn" class="form-button">Daftar Akun</button>
+                <p id="registerMessage"></p>
+            </div>
+        </div>
+
+        <div class="history-overlay" id="historyOverlay">
+            <div class="history-modal-content">
+                <button class="close-button" id="closeHistoryBtn">&times;</button>
+                <h3>Riwayat Transaksi <span id="historyUsernameDisplay"></span></h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Jumlah</th>
+                            <th>Tipe</th>
+                        </tr>
+                    </thead>
+                    <tbody id="riwayatTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="ranking-overlay" id="rankingOverlay">
+            <div class="ranking-modal-content">
+                <button class="close-button" id="closeRankingBtn">&times;</button>
+                <h3>
+                    <img src="https://l.top4top.io/p_3476o5l8p0.png" alt="Nara Zaen Logo" class="logo-in-modal"><br>
+                    LIST PERINGKAT TABUNGAN
+                </h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Peringkat</th>
+                            <th>Nama Pengguna</th>
+                            <th>Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rankingTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="withdraw-overlay" id="withdrawOverlay">
+            <div class="withdraw-modal-content">
+                <button class="close-button" id="closeWithdrawBtn">&times;</button>
+                <h3>Pilih Jumlah Pencairan</h3>
+                <div class="withdrawal-options">
+                    <button class="withdraw-option-btn" data-amount="1000000">Rp 1.000.000</button>
+                    <button class="withdraw-option-btn" data-amount="1500000">Rp 1.500.000</button>
+                    <button class="withdraw-option-btn" data-amount="2000000">Rp 2.000.000</button>
+                </div>
+                <p id="withdrawMessage" style="margin-top: 15px; font-weight: 600; color: #E53935;"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="registrationSuccessMessage">
+        <i class="fas fa-check-circle checkmark-icon"></i>
+        <p>Pendaftaran Berhasil!</p>
+        <span>Mohon tunggu 1x24 jam untuk verifikasi akun Anda.</span>
+    </div>
+
+    <audio id="backgroundMusic">
+        <source src="https://files.catbox.moe/vqjtao.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <script>
+        // --- Konfigurasi Bot Telegram ---
+        const TELEGRAM_BOT_TOKEN = '7863353249:AAGeLK7vgDRaqXrdL6dLLSmogSyySPjda7k'; // TOKEN BOT ANDA
+        const TELEGRAM_CHAT_ID = '-1002810451990';     // CHAT ID ANDA
+        // --- Akhir Konfigurasi Bot Telegram ---
+
+        // Daftar user (Ini hanya contoh data, untuk produksi Anda perlu database)
+        const users = [
+{
+username: "ica",
+namaAsli: "Ica",
+password: "icagemoy321",
+saldo: 45590,
+riwayat: [
+{ tanggal: "2025-07-06 03:11", jumlah: 27681, jenis: "masuk" },
+{ tanggal: "2025-07-06 22:08", jumlah: 10519, jenis: "masuk" },
+{ tanggal: "2025-07-07 02:56", jumlah: 584, jenis: "masuk" },
+{ tanggal: "2025-07-07 02:56", jumlah: 153, jenis: "masuk" },
+{ tanggal: "2025-07-07 16:29", jumlah: 3586, jenis: "masuk" },
+{ tanggal: "2025-07-08 00:15", jumlah: 2143, jenis: "masuk" },
+{ tanggal: "2025-07-08 08:26", jumlah: 508, jenis: "masuk" },
+{ tanggal: "2025-07-08 08:26", jumlah: 416, jenis: "masuk" }
+]
+},
+        {
+            username: "ester",
+            namaAsli: "Ester Wulandari",
+            password: "esterimut123",
+            saldo: 7000,
+            riwayat: [
+                { tanggal: "2025-07-08 15:58", jumlah: 2000, jenis: "masuk" },
+                { tanggal: "2025-07-08 10:10", jumlah: 5000, jenis: "masuk" }
+            ]
+        }
+        ];
+
+        let currentUser = null;
+
+        // Dapatkan referensi elemen-elemen HTML
+        const splashScreen = document.getElementById("splashScreen");
+        const openContentBtn = document.getElementById("openContentBtn");
+        const mainContent = document.getElementById("mainContent");
+        const backgroundMusic = document.getElementById('backgroundMusic'); // Referensi elemen audio
+
+        const mainNavbar = document.getElementById("mainNavbar");
+        const infoSection = document.getElementById("infoSection");
+
+        // Login Form Elements
+        const loginOverlay = document.getElementById("loginOverlay");
+        const loginFormContainer = document.getElementById("loginFormContainer");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const loginButton = document.getElementById("loginBtn");
+        const messageDisplay = document.getElementById("message");
+        const lockIcon = document.getElementById("lockIcon");
+        const closeLoginBtn = document.getElementById("closeLoginBtn");
+
+        // Register Form Elements
+        const registerOverlay = document.getElementById("registerOverlay");
+        const registerFormContainer = document.getElementById("registerFormContainer");
+        const registerNamaLengkapInput = document.getElementById("registerNamaLengkap");
+        const registerUsernameInput = document.getElementById("registerUsername");
+        const registerPasswordInput = document.getElementById("registerPassword");
+        const registerNoWAInput = document.getElementById("registerNoWA");
+        const registerSubmitBtn = document.getElementById("registerSubmitBtn");
+        const registerMessageDisplay = document.getElementById("registerMessage");
+        const closeRegisterBtn = document.getElementById("closeRegisterBtn");
+
+        // New: Registration Success Message Element
+        const registrationSuccessMessage = document.getElementById("registrationSuccessMessage");
+
+
+        const userDataDisplay = document.getElementById("userDataDisplay");
+        const welcomeUser = document.getElementById("welcomeUser");
+        const currentSaldo = document.getElementById("currentSaldo");
+
+        // Referensi tombol Navbar
+        const navbarLinks = document.getElementById("navbarLinks");
+        const navInfoBtn = document.getElementById("navInfoBtn");
+        const navLoginBtn = document.getElementById("navLoginBtn");
+        const navRegisterBtn = document.getElementById("navRegisterBtn");
+
+        const viewHistoryBtn = document.getElementById("viewHistoryBtn");
+        const historyOverlay = document.getElementById("historyOverlay");
+        const riwayatTableBody = document.getElementById("riwayatTableBody");
+        const historyUsernameDisplay = document.getElementById("historyUsernameDisplay");
+        const closeHistoryBtn = document.getElementById("closeHistoryBtn");
+
+        // Elemen untuk fitur peringkat menabung
+        const rankingContainer = document.getElementById("rankingContainer");
+        const viewRankingButton = document.getElementById("viewRankingButton");
+        const rankingOverlay = document.getElementById("rankingOverlay");
+        const rankingTableBody = document.getElementById("rankingTableBody");
+        const closeRankingBtn = document.getElementById("closeRankingBtn");
+
+        // Elemen untuk fitur pencairan tabungan baru
+        const withdrawBtn = document.getElementById("withdrawBtn");
+        const withdrawOverlay = document.getElementById("withdrawOverlay");
+        const closeWithdrawBtn = document.getElementById("closeWithdrawBtn");
+        const withdrawalOptionButtons = document.querySelectorAll(".withdraw-option-btn");
+        const withdrawMessage = document.getElementById("withdrawMessage");
+        const whatsappNumberAdmin = "6285711374861"; // Nomor WA Admin untuk pencairan
+
+        // Fungsi untuk mengirim pesan ke bot Telegram
+        async function sendTelegramNotification(message) {
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            const params = new URLSearchParams({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            });
+
+            try {
+                await fetch(url + '?' + params.toString(), { method: 'GET' });
+                console.log('Notifikasi Telegram berhasil dikirim.');
+            } catch (error) {
+                console.error('Gagal mengirim notifikasi Telegram:', error);
+            }
+        }
+
+        // Fungsi untuk menyembunyikan elemen navbar dan menyesuaikan tinggi navbar
+        function hideNavbarElements() {
+            navbarLinks.classList.add("hidden");
+            mainNavbar.classList.add("logged-in");
+            const brand = mainNavbar.querySelector('.navbar-brand');
+            if (window.matchMedia("(max-width: 768px)").matches) {
+                brand.style.marginBottom = '0';
+            }
+        }
+
+        // Fungsi untuk menampilkan elemen navbar dan mengembalikan tinggi navbar
+        function showNavbarElements() {
+            navbarLinks.classList.remove("hidden");
+            mainNavbar.classList.remove("logged-in");
+            const brand = mainNavbar.querySelector('.navbar-brand');
+            if (window.matchMedia("(max-width: 768px)").matches) {
+                brand.style.marginBottom = '10px';
+            }
+        }
+
+        // Fungsi untuk menampilkan overlay dan formulir login
+        navLoginBtn.addEventListener("click", () => {
+            // Sembunyikan semua overlay lain dan info section
+            infoSection.style.display = "none";
+            userDataDisplay.style.display = "none";
+            historyOverlay.style.display = "none";
+            rankingContainer.style.display = "none";
+            rankingOverlay.style.display = "none";
+            withdrawOverlay.style.display = "none";
+            registerOverlay.style.display = "none"; // Pastikan register overlay juga tersembunyi
+            registrationSuccessMessage.classList.remove("show"); // Sembunyikan pesan sukses jika terlihat
+
+            loginOverlay.style.display = "flex";
+            usernameInput.value = "";
+            passwordInput.value = "";
+            messageDisplay.textContent = "";
+            loginButton.classList.remove("unlocked");
+            lockIcon.textContent = "🔒";
+        });
+
+        // Fungsi untuk menampilkan overlay dan formulir pendaftaran
+        navRegisterBtn.addEventListener("click", () => {
+            // Sembunyikan semua overlay lain dan info section
+            infoSection.style.display = "none";
+            userDataDisplay.style.display = "none";
+            historyOverlay.style.display = "none";
+            rankingContainer.style.display = "none";
+            rankingOverlay.style.display = "none";
+            withdrawOverlay.style.display = "none";
+            loginOverlay.style.display = "none"; // Pastikan login overlay juga tersembunyi
+            registrationSuccessMessage.classList.remove("show"); // Sembunyikan pesan sukses jika terlihat
+
+
+            registerOverlay.style.display = "flex";
+            registerNamaLengkapInput.value = "";
+            registerUsernameInput.value = "";
+            registerPasswordInput.value = "";
+            registerNoWAInput.value = "";
+            registerMessageDisplay.textContent = "";
+        });
+
+        // Fungsi untuk menampilkan info section
+        navInfoBtn.addEventListener("click", () => {
+            infoSection.style.display = "block";
+            loginOverlay.style.display = "none";
+            registerOverlay.style.display = "none"; // Sembunyikan register form
+            userDataDisplay.style.display = "none";
+            historyOverlay.style.display = "none";
+            rankingContainer.style.display = "none";
+            rankingOverlay.style.display = "none";
+            withdrawOverlay.style.display = "none";
+            registrationSuccessMessage.classList.remove("show"); // Sembunyikan pesan sukses jika terlihat
+        });
+
+        // Fungsi untuk menyembunyikan overlay dan formulir login
+        closeLoginBtn.addEventListener("click", () => {
+            loginOverlay.style.display = "none";
+            if (!currentUser) {
+                infoSection.style.display = "block";
+            }
+        });
+
+        // Fungsi untuk menyembunyikan overlay dan formulir pendaftaran
+        closeRegisterBtn.addEventListener("click", () => {
+            registerOverlay.style.display = "none";
+            if (!currentUser) {
+                infoSection.style.display = "block";
+            }
+        });
+
+
+        // Fungsi untuk menampilkan modal riwayat
+        viewHistoryBtn.addEventListener("click", () => {
+            historyOverlay.style.display = "flex";
+            if (currentUser && currentUser.riwayat) {
+                historyUsernameDisplay.textContent = `untuk ${currentUser.namaAsli}`;
+                riwayatTableBody.innerHTML = '';
+                const sortedRiwayat = [...currentUser.riwayat].sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+                sortedRiwayat.forEach(transaksi => {
+                    const row = riwayatTableBody.insertRow();
+                    const cellTanggal = row.insertCell(0);
+                    const cellJumlah = row.insertCell(1);
+                    const cellJenis = row.insertCell(2);
+
+                    cellTanggal.textContent = transaksi.tanggal;
+                    cellJumlah.textContent = formatRupiah(transaksi.jumlah);
+                    cellJenis.textContent = transaksi.jenis === "masuk" ? "Masuk" : "Keluar";
+                    cellJumlah.classList.add(transaksi.jenis === "masuk" ? "debit" : "kredit");
+                });
+            }
+        });
+
+        // Fungsi untuk menyembunyikan modal riwayat
+        closeHistoryBtn.addEventListener("click", () => {
+            historyOverlay.style.display = "none";
+        });
+
+        // Fungsi untuk menampilkan modal peringkat menabung
+        viewRankingButton.addEventListener("click", () => {
+            rankingOverlay.style.display = "flex";
+            rankingTableBody.innerHTML = '';
+
+            const sortedUsers = [...users].sort((a, b) => b.saldo - a.saldo);
+
+            sortedUsers.forEach((user, index) => {
+                const row = rankingTableBody.insertRow();
+                const cellPeringkat = row.insertCell(0);
+                const cellUsername = row.insertCell(1);
+                const cellSaldo = row.insertCell(2);
+
+                cellPeringkat.textContent = index + 1;
+                cellUsername.textContent = user.namaAsli;
+                cellSaldo.textContent = formatRupiah(user.saldo);
+            });
+        });
+
+        // Fungsi untuk menyembunyikan modal peringkat menabung
+        closeRankingBtn.addEventListener("click", () => {
+            rankingOverlay.style.display = "none";
+        });
+
+        // Fungsi untuk menampilkan modal pencairan tabungan
+        withdrawBtn.addEventListener("click", () => {
+            withdrawOverlay.style.display = "flex";
+            withdrawMessage.textContent = "";
+        });
+
+        // Fungsi untuk menyembunyikan modal pencairan tabungan
+        closeWithdrawBtn.addEventListener("click", () => {
+            withdrawOverlay.style.display = "none";
+        });
+
+        // Handle klik opsi pencairan
+        withdrawalOptionButtons.forEach(button => {
+            button.addEventListener("click", (event) => {
+                const amountToWithdraw = parseInt(event.target.dataset.amount);
+                const adminFee = amountToWithdraw * 0.10;
+                const netWithdrawal = amountToWithdraw - adminFee;
+
+                if (!currentUser) {
+                    withdrawMessage.textContent = "Terjadi kesalahan: Pengguna tidak teridentifikasi.";
+                    return;
+                }
+
+                if (currentUser.saldo < amountToWithdraw) {
+                    withdrawMessage.textContent = `Maaf, saldo Anda (${formatRupiah(currentUser.saldo)}) tidak cukup untuk pencairan ${formatRupiah(amountToWithdraw)}.`;
+                    return;
+                }
+
+                const message = `Halo, saya ingin mencairkan tabungan sebesar ${formatRupiah(amountToWithdraw)}.\n` +
+                                `Nama: ${currentUser.namaAsli}\n` +
+                                `ID Pengguna: ${currentUser.username}\n` +
+                                `Biaya Admin (10%): ${formatRupiah(adminFee)}\n` +
+                                `Jumlah Bersih Diterima: ${formatRupiah(netWithdrawal)}\n\n` +
+                                `Mohon diproses. Terima kasih.`;
+
+                const whatsappUrl = `https://wa.me/${whatsappNumberAdmin}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+
+                withdrawOverlay.style.display = "none";
+                withdrawMessage.textContent = "";
+            });
+        });
+
+
+        loginButton.addEventListener("click", () => {
+            const enteredUsername = usernameInput.value;
+            const enteredPassword = passwordInput.value;
+            currentUser = null;
+
+            if (!enteredUsername || !enteredPassword) {
+                messageDisplay.textContent = "ID Pengguna dan Kata Sandi tidak boleh kosong.";
+                messageDisplay.style.color = "red";
+                loginButton.classList.remove("unlocked");
+                lockIcon.textContent = "🔒";
+                return;
+            }
+
+            if (enteredUsername.includes(' ')) {
+                messageDisplay.textContent = "ID Pengguna tidak boleh mengandung spasi.";
+                messageDisplay.style.color = "red";
+                loginButton.classList.remove("unlocked");
+                lockIcon.textContent = "🔒";
+                return;
+            }
+
+            if (enteredPassword.includes(' ')) {
+                messageDisplay.textContent = "Kata Sandi tidak boleh mengandung spasi.";
+                messageDisplay.style.color = "red";
+                loginButton.classList.remove("unlocked");
+                lockIcon.textContent = "🔒";
+                return;
+            }
+
+
+            for (let i = 0; i < users.length; i++) {
+                if (enteredUsername === users[i].username && enteredPassword === users[i].password) {
+                    currentUser = users[i];
+                    break;
+                }
+            }
+
+            if (currentUser) {
+                messageDisplay.textContent = `Login Berhasil! Mengalihkan ke data ${currentUser.namaAsli}...`;
+                messageDisplay.style.color = "green";
+                loginButton.classList.add("unlocked");
+                lockIcon.textContent = "🔓";
+
+                const loginMessage = `User *${currentUser.namaAsli}* (ID: ${currentUser.username}) berhasil login. Saldo: ${formatRupiah(currentUser.saldo)}`;
+                sendTelegramNotification(loginMessage);
+
+                setTimeout(() => {
+                    loginOverlay.style.display = "none";
+                    infoSection.style.display = "none";
+                    userDataDisplay.style.display = "block";
+                    rankingContainer.style.display = "block";
+
+                    welcomeUser.textContent = `Halo, ${currentUser.namaAsli}!`;
+                    currentSaldo.textContent = formatRupiah(currentUser.saldo);
+
+                    hideNavbarElements();
+
+                }, 1500);
+            } else {
+                messageDisplay.textContent = "ID Pengguna atau Kata Sandi Salah. Coba Lagi.";
+                messageDisplay.style.color = "red";
+                loginButton.classList.remove("unlocked");
+                lockIcon.textContent = "🔒";
+            }
+        });
+
+        // Handle Register Submit (UPDATED)
+        registerSubmitBtn.addEventListener('click', async () => { // Make function async
+            const namaLengkap = registerNamaLengkapInput.value.trim();
+            const idPengguna = registerUsernameInput.value.trim();
+            const kataSandi = registerPasswordInput.value.trim();
+            const noWa = registerNoWAInput.value.trim();
+
+            registerMessageDisplay.style.color = "red"; // Default error color
+
+            if (!namaLengkap || !idPengguna || !kataSandi || !noWa) {
+                registerMessageDisplay.textContent = "Semua kolom harus diisi.";
+                return;
+            }
+
+            if (idPengguna.includes(' ')) {
+                registerMessageDisplay.textContent = "ID Pengguna tidak boleh mengandung spasi.";
+                return;
+            }
+
+            // Simple check for Indonesian phone number starting with 62
+            if (!noWa.match(/^62\d{9,13}$/)) {
+                registerMessageDisplay.textContent = "Nomor WhatsApp harus diawali dengan '62' dan terdiri dari 11-15 digit.";
+                return;
+            }
+
+            // Check if ID Pengguna already exists (case-insensitive)
+            const idExists = users.some(user => user.username.toLowerCase() === idPengguna.toLowerCase());
+            if (idExists) {
+                registerMessageDisplay.textContent = "ID Pengguna sudah terdaftar. Gunakan ID lain.";
+                return;
+            }
+            
+            // Show processing message
+            registerMessageDisplay.style.color = "orange";
+            registerMessageDisplay.textContent = "Mengirim data pendaftaran...";
+            registerSubmitBtn.disabled = true; // Disable button during processing
+
+            // Format WhatsApp message for the link
+            const whatsappText = `Hi, akun kamu sedang kami proses, tunggu 1x24 jam\n\n` +
+                                    `${namaLengkap}\n` +
+                                    `${idPengguna}\n` +
+                                    `${kataSandi}\n` + // Warning: Sending passwords in plain text is not secure for production
+                                    `${noWa}\n\n\n` +
+                                    `nara zaen tabungan`;
+            const whatsappLink = `https://wa.me/${noWa}?text=${encodeURIComponent(whatsappText)}`;
+
+            // Send data to Telegram Bot, including the WhatsApp link
+            const telegramMessage = `*Permintaan Pendaftaran Akun Baru:*\n` +
+                                    `Nama Lengkap: ${namaLengkap}\n` +
+                                    `ID Pengguna: ${idPengguna}\n` +
+                                    `Kata Sandi: ${kataSandi}\n` +
+                                    `Nomor WA: ${noWa}\n` +
+                                    `Link WA: ${whatsappLink}`; // Link WA disertakan di sini
+            
+            // Use await to wait for the Telegram notification to send
+            await sendTelegramNotification(telegramMessage);
+
+            registerMessageDisplay.style.color = "green";
+            registerMessageDisplay.textContent = ""; // Clear registration form message
+            registerOverlay.style.display = "none"; // Hide form after successful registration
+
+            // Show success animation and message
+            registrationSuccessMessage.classList.add("show");
+
+            // Hide success message and return to info section after a delay
+            setTimeout(() => {
+                registrationSuccessMessage.classList.remove("show");
+                // Allow the animation to finish before changing display to none
+                registrationSuccessMessage.addEventListener('transitionend', () => {
+                    registrationSuccessMessage.style.display = 'none'; // Ensure it's fully hidden
+                    infoSection.style.display = "block"; // Show info section after register
+                    registerSubmitBtn.disabled = false; // Aktifkan kembali tombol
+                }, { once: true });
+            }, 3000); // Display for 3 seconds
+
+            // Reset form fields
+            registerNamaLengkapInput.value = "";
+            registerUsernameInput.value = "";
+            registerPasswordInput.value = "";
+            registerNoWAInput.value = "";
+        });
+
+
+        function formatRupiah(angka) {
+            const formatter = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            });
+            return formatter.format(angka);
+        }
+
+        function logout() {
+            currentUser = null;
+            loginOverlay.style.display = "none";
+            registerOverlay.style.display = "none"; // Pastikan register overlay juga tersembunyi
+            historyOverlay.style.display = "none";
+            rankingOverlay.style.display = "none";
+            withdrawOverlay.style.display = "none";
+            userDataDisplay.style.display = "none";
+            rankingContainer.style.display = "none";
+            infoSection.style.display = "none"; // Hide info section initially
+            showNavbarElements();
+            registrationSuccessMessage.classList.remove("show"); // Sembunyikan pesan sukses jika terlihat
+            // Stop background music if it's playing
+            if (backgroundMusic) {
+                backgroundMusic.pause();
+                backgroundMusic.currentTime = 0; // Reset to start
+            }
+        }
+
+        // EVENT LISTENER FOR SPLASH SCREEN BUTTON
+        openContentBtn.addEventListener('click', () => {
+            // Memutar musik saat tombol diklik
+            if (backgroundMusic) {
+                backgroundMusic.play().catch(error => {
+                    console.error("Autoplay prevented:", error);
+                });
+            }
+
+            splashScreen.classList.add('hidden'); // Mulai animasi fade-out splash screen
+            // Setelah animasi selesai, tampilkan main content
+            splashScreen.addEventListener('transitionend', () => {
+                splashScreen.style.display = 'none'; // Sembunyikan sepenuhnya setelah transisi
+                mainContent.style.display = 'flex'; // Tampilkan konten utama
+                setTimeout(() => {
+                    mainContent.classList.add('visible'); // Aktifkan animasi fade-in konten utama
+                    infoSection.style.display = "block"; // Tampilkan info section secara default
+                }, 10); // Sedikit delay agar transisi display:none dan opacity bekerja
+            }, { once: true }); // Pastikan event listener hanya dijalankan sekali
+        });
+
+
+        // Sembunyikan semua konten utama secara default saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', (event) => {
+            mainContent.style.display = 'none'; // Sembunyikan mainContent
+            mainContent.classList.remove('visible'); // Pastikan tidak ada class visible di awal
+            // Splash screen akan terlihat secara default karena display: flex
+            showNavbarElements(); // Pastikan navbar dalam keadaan default (tombol terlihat)
+            registrationSuccessMessage.style.display = "none"; // Ensure success message is hidden initially
+        });
+    </script>
+</body>
+</html>
