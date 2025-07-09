@@ -9,8 +9,9 @@
 username: "ica",
 namaAsli: "Ica",
 password: "icagemoy321",
-saldo: 65912,
+saldo: 71008,
 riwayat: [
+{ tanggal: "2025-07-09 22:02", jumlah: 5096, jenis: "masuk" },
 { tanggal: "2025-07-09 15:02", jumlah: 5036, jenis: "masuk" },
 { tanggal: "2025-07-09 09:20", jumlah: 4502, jenis: "masuk" },
 { tanggal: "2025-07-09 10:39", jumlah: 5372, jenis: "masuk" },  
@@ -27,16 +28,16 @@ riwayat: [
 ]
 },
         {
-            username: "ester",
-            namaAsli: "Ester Wulandari",
-            password: "esterimut123",
-            saldo: 13449,
-            riwayat: [
-                { tanggal: "2025-07-09 20:49", jumlah: 1449, jenis: "masuk" },
-                { tanggal: "2025-07-09 08:19", jumlah: 2000, jenis: "masuk" },
-            { tanggal: "2025-07-08 22:07", jumlah: 3000, jenis: "masuk" },
-                { tanggal: "2025-07-08 15:58", jumlah: 2000, jenis: "masuk" },
-                { tanggal: "2025-07-08 10:10", jumlah: 5000, jenis: "masuk" }
+username: "ester",
+namaAsli: "Ester Wulandari",
+password: "esterimut123",
+saldo: 13449,
+riwayat: [
+{ tanggal: "2025-07-09 20:49", jumlah: 1449, jenis: "masuk" },
+{ tanggal: "2025-07-09 08:19", jumlah: 2000, jenis: "masuk" },
+{ tanggal: "2025-07-08 22:07", jumlah: 3000, jenis: "masuk" },
+{ tanggal: "2025-07-08 15:58", jumlah: 2000, jenis: "masuk" },
+{ tanggal: "2025-07-08 10:10", jumlah: 5000, jenis: "masuk" }
             ]
         }
         ];
