@@ -29,6 +29,15 @@ riwayat: [
 { tanggal: "2025-07-08 08:26", jumlah: 416, jenis: "masuk" }
 ]
 },
+{
+username: "2912244444",
+namaAsli: "Rahma",
+password: "rahma0106",
+saldo: 0,
+riwayat: [
+
+]
+},
         {
 username: "ester",
 namaAsli: "Ester Wulandari",
