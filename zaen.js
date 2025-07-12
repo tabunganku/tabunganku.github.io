@@ -33,9 +33,10 @@ riwayat: [
 username: "2912244444",
 namaAsli: "Rahma",
 password: "rahma0106",
-saldo: 0,
+saldo: 50000,
 riwayat: [
 
+{ tanggal: "2025-07-12 09:58", jumlah: 50000, jenis: "masuk" },
 ]
 },
         {
