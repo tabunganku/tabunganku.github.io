@@ -51,9 +51,10 @@ riwayat: [
 username: "ester",
 namaAsli: "Ester Wulandari",
 password: "esterimut123",
-saldo: 39708,
+saldo: 59708,
 riwayat: [
 
+{ tanggal: "2025-07-12 17:17", jumlah: 20000, jenis: "masuk" },
 { tanggal: "2025-07-12 17:17", jumlah: 15980, jenis: "masuk" },
 { tanggal: "2025-07-12 09:47", jumlah: 2500, jenis: "masuk" },
 { tanggal: "2025-07-12 08:21", jumlah: 3000, jenis: "masuk" },
