@@ -43,9 +43,10 @@ riwayat: [
 username: "2912244444",
 namaAsli: "Rahma",
 password: "rahma0106",
-saldo: 100000,
+saldo: 105000,
 riwayat: [
 
+{ tanggal: "2025-07-15 19:38", jumlah: 5000, jenis: "masuk" },
 { tanggal: "2025-07-13 13:49", jumlah: 50000, jenis: "masuk" },
 { tanggal: "2025-07-12 09:58", jumlah: 50000, jenis: "masuk" },
 ]
@@ -541,7 +542,7 @@ riwayat: [
         });
 
 
-        // Sembuunyikan semua konten utama secara default saat halaman dimuat
+        // Sembunyikan semua konten utama secara default saat halaman dimuat
         document.addEventListener('DOMContentLoaded', (event) => {
             mainContent.style.display = 'none'; // Sembunyikan mainContent
             mainContent.classList.remove('visible'); // Pastikan tidak ada class visible di awal
