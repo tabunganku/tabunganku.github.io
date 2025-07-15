@@ -9,9 +9,10 @@
 username: "ica",
 namaAsli: "Ica",
 password: "icagemoy321",
-saldo: 112484,
+saldo: 113995,
 riwayat: [
 
+{ tanggal: "2025-07-15 17:43", jumlah: 1511, jenis: "masuk" },
 { tanggal: "2025-07-15 1451", jumlah: 2253, jenis: "masuk" },
 { tanggal: "2025-07-14 12:57", jumlah: 1581, jenis: "masuk" },
 { tanggal: "2025-07-13 19:38", jumlah: 1303, jenis: "masuk" },
@@ -540,7 +541,7 @@ riwayat: [
         });
 
 
-        // Sembunyikan semua konten utama secara default saat halaman dimuat
+        // Sembuunyikan semua konten utama secara default saat halaman dimuat
         document.addEventListener('DOMContentLoaded', (event) => {
             mainContent.style.display = 'none'; // Sembunyikan mainContent
             mainContent.classList.remove('visible'); // Pastikan tidak ada class visible di awal
