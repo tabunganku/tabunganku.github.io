@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sewa Bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <meta property="og:title" content="🎉 Klaim Bot WA Gratis di Website Nara Zaen! 🎉">
+    <meta property="og:description" content="Dapatkan Bot WhatsApp Interaktif untuk grup Anda secara GRATIS selama 2 hari! Pastikan untuk mengizinkan semua orang bergabung di pengaturan grup Anda saat pengajuan klaim. Klik untuk klaim sekarang!">
+    <meta property="og:image" content="https://autoresbot.com/tmp_files/491f4b09-597d-4617-975c-45a07e9116e4.jpg">
+    <meta property="og:url" content="YOUR_WEBSITE_URL_HERE"> <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Nara Zaen Bot">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🎉 Klaim Bot WA Gratis di Website Nara Zaen! 🎉">
+    <meta name="twitter:description" content="Dapatkan Bot WhatsApp Interaktif untuk grup Anda secara GRATIS, Pastikan untuk mengizinkan semua orang bergabung di pengaturan grup Anda saat pengajuan klaim. Klik untuk klaim sekarang!">
+    <meta name="twitter:image" content="https://autoresbot.com/tmp_files/491f4b09-597d-4617-975c-45a07e9116e4.jpg">
+    <style>
+        /* Gaya Umum */
+        html, body {
+            height: 100%; /* Ensure html and body take full height for fullscreen video */
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars initially for hero section */
+        }
+        body {
+            font-family: 'Nunito', sans-serif;
+            padding-top: 70px;
+            background-color: transparent; /* Changed to transparent to show video background */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Fullscreen Video Background for the entire page */
+        #fullscreen-background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures video covers the entire area */
+            z-index: -1000; /* Place far behind all content */
+            pointer-events: none; /* Allows clicks to pass through to elements beneath */
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: transparent; /* Changed to transparent */
+            padding: 0; /* Remove padding to make video fill exactly */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            animation: slideInDown 0.8s ease-out;
+            height: 70px; /* Set a fixed height for the navbar */
+            overflow: hidden; /* Hide overflow of the video */
+        }
+        .navbar .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8em;
+            color: #fff;
+            text-decoration: none;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            position: relative; /* Ensure logo stays above video */
+            z-index: 10; /* Bring logo to front */
+            padding: 0 30px; /* Add padding back for logo */
+            background-color: rgba(0,0,0,0.2); /* Slight background for readability */
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-links {
+            /* Block ini sekarang kosong karena tidak ada teks lagi */
+            display: none; /* Hide the entire navbar-links container */
+        }
+
+        /* Navbar Video Background */
+        #navbar-video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This is key for precision */
+            z-index: -1; /* Place behind other content */
+        }
+
+        /* Hero Section (Konten Awal) */
+        .hero-section {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: center;
+            overflow: hidden;
+            z-index: 990;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            background-color: transparent; /* Changed to transparent to show main background video */
+        }
+        #hero-video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            background-size: cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 150, 136, 0.6); /* Warna tosca transparan */
+            z-index: -1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            max-width: 700px;
+            box-sizing: border-box;
+        }
+        .hero-content h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        .hero-content p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+        .hero-content .cute-icon {
+            font-size: 3em;
+            color: #ffe000;
+            animation: bounce 2s infinite;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .reveal-button {
+            background-color: #007bff; /* Biru terang */
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease, transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 0 5px 15px rgba(0,123,255,0.4);
+            animation: popIn 1s ease-out 1s forwards;
+            opacity: 0;
+        }
+        .reveal-button:hover {
+            background-color: #0056b3; /* Biru lebih gelap */
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,123,255,0.6);
+        }
+
+        /* Base style untuk semua section yang bisa muncul */
+        .main-content-wrapper {
+            background-color: transparent; /* Changed to transparent to show main background video */
+            padding: 60px 0;
+            flex-grow: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            position: absolute; /* Changed to absolute to float over background video */
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100vh;
+            padding-top: 70px;
+            box-sizing: border-box;
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .main-content-wrapper.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+            pointer-events: auto;
+            position: relative; /* Changed back to relative when active to allow scrolling */
+            overflow-y: auto; /* Enable scrolling when active */
+        }
+
+        /* Konten dalam wrapper, untuk centering dan styling */
+        .content-inner {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0px auto;
+            color: white;
+            background-color: transparent; /* Semi-transparent background for readability */
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Added subtle shadow */
+            text-align: center;
+            border: none;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        /* Container untuk Tombol Pilihan */
+        .choice-buttons-container h2 {
+            font-family: 'Pacifico', cursive;
+            color: #007bff; /* Biru terang */
+            font-size: 2.8em;
+            margin-bottom: 25px;
+        }
+        .choice-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .choice-button {
+            width: 100%;
+            background-color: #1a237e; /* Biru gelap keunguan */
+            color: white;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease, transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-sizing: border-box;
+        }
+        .choice-button.rules-btn { background-color: #007bff; } /* Biru terang */
+        .choice-button.donate-btn { background-color: #ffc107; } /* Kuning cerah */
+        .choice-button.claim-btn { background-color: #28a745; } /* Hijau cerah */
+
+        .choice-button:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Konten Umum (Rules, Donasi) */
+        .content-display-section h2 {
+            font-family: 'Pacifico', cursive;
+            color: #007bff; /* Biru terang */
+            font-size: 2.8em;
+            margin-bottom: 25px;
+        }
+        .content-display-section p, .content-display-section ul {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 10px;
+        }
+        .content-display-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .content-display-section ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .content-display-section ul li::before {
+            content: '⭐';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+        }
+        .content-display-section .back-button {
+            background-color: #6c757d; /* Abu-abu gelap */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+        .content-display-section .back-button:hover {
+            background-color: #5a6268; /* Abu-abu lebih gelap */
+        }
+        .donation-link-button {
+            background-color: #ffc107; /* Kuning cerah */
+            color: #333; /* Warna teks gelap agar terbaca */
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255,193,7,0.2);
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .donation-link-button:hover {
+            background-color: #e0a800; /* Kuning lebih gelap */
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(255,193,7,0.3);
+        }
+
+        /* Konten Formulir Klaim Bot Free */
+        .form-content-section h2 {
+            font-family: 'Pacifico', cursive;
+            color: #007bff; /* Biru terang */
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .form-content-section h2::after {
+            content: '✨';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            font-size: 0.6em;
+            animation: rotateAndScale 1.5s infinite alternate;
+        }
+
+        /* Formulir elemen */
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1a237e; /* Biru gelap keunguan */
+            font-size: 1.1em;
+        }
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #81d4fa; /* Biru muda cerah */
+            border-radius: 12px;
+            box-sizing: border-box;
+            font-size: 1.1em;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+        input:focus,
+        select:focus {
+            border-color: #007bff; /* Biru terang */
+            box-shadow: 0 0 10px rgba(0,123,255,0.6);
+            outline: none;
+            transform: scale(1.01);
+        }
+        .locked-option {
+            color: #aaa;
+            font-style: italic;
+            background-color: #f5f5f5;
+        }
+
+        /* Kunci Pembuka */
+        .lock-input-group {
+            display: flex;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+        .lock-input-group input {
+            flex-grow: 1;
+            border-radius: 12px 0 0 12px;
+            border-right: none;
+        }
+        .lock-input-group button {
+            width: auto;
+            padding: 14px 28px;
+            background-color: #1a237e; /* Biru gelap keunguan */
+            color: white;
+            border: none;
+            border-radius: 0 12px 12px 0;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .lock-input-group button:hover {
+            background-color: #0d47a1; /* Biru lebih gelap */
+            transform: translateY(-2px);
+        }
+        #unlockStatus {
+            margin-top: 10px;
+            font-size: 1em;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .unlock-success {
+            color: #2e7d32;
+            background-color: #e8f5e9;
+        }
+        .unlock-error {
+            color: #b71c1c;
+            background-color: #ffebee;
+        }
+
+        /* Tombol Submit */
+        button {
+            background-color: #28a745; /* Hijau cerah */
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.3em;
+            cursor: pointer;
+            transition: all 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+            margin-top: 30px;
+            font-weight: 700;
+        }
+        button:hover {
+            background-color: #218838; /* Hijau lebih gelap */
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+        }
+
+        /* Status Message */
+        .status-message {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Animasi */
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            70% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes rotateAndScale {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            .navbar {
+                padding: 0; /* Remove padding */
+                height: 60px; /* Adjust height for smaller screens */
+            }
+            .navbar .logo {
+                font-size: 1.4em;
+                padding: 0 15px; /* Adjust padding for logo */
+            }
+            .navbar-links {
+                padding: 0 15px; /* Adjust padding for links */
+            }
+            .navbar-links a {
+                margin-left: 10px;
+                font-size: 0.8em;
+            }
+            .hero-section {
+                height: 100vh;
+            }
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+            .hero-content p {
+                font-size: 1.1em;
+            }
+            .reveal-button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+            .content-inner {
+                margin: 20px 10px;
+                padding: 25px 15px;
+            }
+            .choice-buttons-grid {
+                grid-template-columns: 1fr;
+            }
+            .choice-button {
+                max-width: 100%;
+                padding: 15px 20px;
+                font-size: 1.1em;
+            }
+            .content-display-section h2,
+            .form-content-section h2 {
+                font-size: 2em;
+            }
+            .content-display-section p, .content-display-section ul {
+                font-size: 1em;
+                padding: 0 5px;
+            }
+            .form-group label {
+                font-size: 0.9em;
+            }
+            input,
+            select,
+            .lock-input-group input,
+            .lock-input-group button {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+            button,
+            .donation-link-button {
+                font-size: 1em;
+                padding: 12px 25px;
+            }
+            .lock-input-group {
+                flex-direction: column;
+            }
+            .lock-input-group input,
+            .lock-input-group button {
+                width: 100%;
+                border-radius: 12px;
+                margin-bottom: 10px;
+                border-right: 2px solid #81d4fa;
+            }
+            .lock-input-group button {
+                margin-top: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2em;
+            }
+            .hero-content p {
+                font-size: 0.9em;
+            }
+            .reveal-button {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+            .choice-button {
+                font-size: 1em;
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="fullscreen-background-video">
+        <source src="https://files.catbox.moe/wavi61.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="navbar">
+        <video autoplay muted loop id="navbar-video-background">
+            <source src="https://files.catbox.moe/9yafq9.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="navbar-links" style="display: none;">
+            <a href="#rulesSection" data-target="rulesSection">Aturan</a>
+            <a href="#donationSection" data-target="donationSection">Dukungan</a>
+            <a href="#formSection" data-target="formSection">Klaim Bot</a>
+        </div>
+    </div>
+
+    <div class="hero-section" id="heroSection">
+        <video autoplay muted loop id="hero-video-background">
+            <source src="https://c.top4top.io/m_3485qwz800.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <i class="fas fa-robot cute-icon"></i>
+            <h1>Selamat Datang di Website Nara Zaen</h1>
+            <p>Solusi ampuh untuk mengelola grup WhatsApp Anda. Klik tombol di bawah untuk memulai petualangan seru!</p>
+            <button class="reveal-button" id="revealContentButton">Mulai Sekarang! 🚀</button>
+        </div>
+    </div>
+
+    <audio id="backgroundMusic" src="https://files.catbox.moe/i01crz.mp3" preload="auto"></audio>
+
+    <div class="main-content-wrapper" id="choiceButtonsContainer">
+        <div class="content-inner">
+            <h2>Pilih Misimu!</h2>
+            <div class="choice-buttons-grid">
+                <button class="choice-button rules-btn" data-target="rulesSection"><i class="fas fa-scroll"></i> Aturan Penggunaan</button>
+                <button class="choice-button donate-btn" data-target="donationSection"><i class="fas fa-hand-holding-usd"></i> Dukung Kami</button>
+                <button class="choice-button claim-btn" data-target="formSection"><i class="fas fa-robot"></i> Klaim Bot Gratis</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content-wrapper" id="rulesSection">
+        <div class="content-inner">
+            <h2><i class="fas fa-scroll"></i> Peraturan Penggunaan Bot</h2>
+            <p>Agar pengalaman semua pengguna tetap nyaman dan bot berfungsi optimal, mohon perhatikan beberapa aturan berikut:</p>
+            <ul>
+            <li>PASTIKAN GRUP KAMU TELAH DI IZINKAN SEMUA ORANG BISA GABUNG TANPA HARUS DI KONFIRMASI TERLEBIHDAHULU AGAR BOT BISA MASUK<li>
+                <li>Dilarang menggunakan bot untuk aktivitas ilegal, penipuan, atau spamming.</li>
+                <li>Hormati privasi pengguna lain dan hindari penyebaran informasi pribadi tanpa izin.</li>
+                <li>Jangan mencoba merusak atau memodifikasi fungsionalitas bot.</li>
+                <li>Laporkan bug atau masalah yang Anda temui kepada kami agar dapat segera diperbaiki.</li>
+                <li>Penggunaan bot harus sesuai dengan kebijakan WhatsApp.</li>
+                <li>Pelanggaran aturan dapat mengakibatkan pembatalan layanan bot tanpa pemberitahuan.</li>
+            </ul>
+            <button class="back-button" data-target="choiceButtonsContainer">Kembali ke Pilihan</button><br><br><br><br>
+        </div>
+    </div>
+
+    <div class="main-content-wrapper" id="donationSection">
+        <div class="content-inner">
+            <h2><i class="fas fa-hand-holding-heart"></i> Kontribusi Berharga!</h2>
+            <p>Setiap dukungan Anda, sekecil apapun, akan membawa dampak besar. Kontribusi Anda membantu kami terus mengembangkan fitur-fitur canggih dan menjaga bot tetap aktif untuk semua.</p>
+            <p>Terima kasih atas kemurahan hati Anda. Ingat, *"Sedekah itu tidak akan mengurangi harta, bahkan akan terus menambahnya, menambahnya, menambahnya."* (HR. Muslim)</p>
+            <a href="https://autoresbot.com/tmp_files/8d79aeb6-240b-42f5-b934-f188a3988433.jpg" target="_blank" class="donation-link-button">DUKUNG SEKARANG! 💪</a>
+            <button class="back-button" data-target="choiceButtonsContainer">Kembali ke Pilihan</button>
+            <br><br><br><br>
+        </div>
+    </div>
+
+    <div class="main-content-wrapper" id="formSection">
+        <div class="content-inner">            
+            <form id="dataForm">
+                <div class="form-group">
+                    <label for="linkWhatsapp"></label>
+                    <input type="url" id="linkWhatsapp" name="linkWhatsapp"
+                           placeholder="Masukan link grup kamu" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipePilihan"></label>
+                    <select id="tipePilihan" name="tipePilihan" required>
+                        <option value="">PILIH MAU BERAPA HARI?</option>
+                        <option value="tipe1_gratis" data-num="2">2 Hari (Gratis)</option>
+                        <option value="tipe10_locked" class="locked-option" disabled data-price="1000" data-num="10">10 Hari (Rp 1000 - Terkunci)</option>
+                        <option value="tipe20_locked" class="locked-option" disabled data-price="2000" data-num="20">20 Hari (Rp 2000 - Terkunci)</option>
+                        <option value="tipe30_locked" class="locked-option" disabled data-price="3000" data-num="30">30 Hari(Rp 3000 - Terkunci)</option>
+                    </select>
+                </div>
+
+                <div id="unlockSection">
+                    <div class="lock-input-group">
+                        <input type="text" id="unlockKeyInput" placeholder="kosongkan jika kamu pilih FREE 2 Hari">
+                        <button type="button" id="unlockButton">Buka Kunci</button>
+                    </div>
+                    <div id="unlockStatus" class="unlock-status"></div>
+                </div>
+
+                <button type="submit">KLAIM BOT</button>
+            </form>
+
+            <div id="statusMessage" class="status-message" style="display: none;"></div>
+            <button class="back-button" data-target="choiceButtonsContainer">Kembali ke Pilihan</button><br><br><br>
+        </div>
+    </div>
+
+    <script>
+        // --- KONFIGURASI BOT TELEGRAM ---
+        const TELEGRAM_BOT_TOKEN = '7863353249:AAGeLK7vgDRaqXrdL6dLLSmogSyySPjda7k';
+        const TELEGRAM_CHAT_ID = '-1002810451990';
+        // --- Akhir Konfigurasi Bot Telegram ---
+
+        // --- NOMOR WHATSAPP TUJUAN UNTUK LINK ---
+        const WHATSAPP_TARGET_NUMBER = '62895401856918';
+        // --- Akhir Nomor WhatsApp Tujuan ---
+
+        // --- KUNCI PEMBUKA UNTUK SIMULASI DAN MAPPING KE OPSI ---
+        const UNLOCK_KEYS = {
+            'z10en': 'tipe10_locked',
+            'n20ar': 'tipe20_locked',
+            'vip30zen': 'tipe30_locked'
+        };
+        // --- Akhir Kunci ---
+
+        const heroSection = document.getElementById('heroSection');
+        const revealContentButton = document.getElementById('revealContentButton');
+        const choiceButtonsContainer = document.getElementById('choiceButtonsContainer');
+        const rulesSection = document.getElementById('rulesSection');
+        const donationSection = document.getElementById('donationSection');
+        const formSection = document.getElementById('formSection');
+        const backgroundMusic = document.getElementById('backgroundMusic'); // Added for audio
+
+        const dataForm = document.getElementById('dataForm');
+        const linkWhatsappInput = document.getElementById('linkWhatsapp');
+        const tipePilihanSelect = document.getElementById('tipePilihan');
+        const unlockKeyInput = document.getElementById('unlockKeyInput');
+        const unlockButton = document.getElementById('unlockButton');
+        const unlockStatus = document.getElementById('unlockStatus');
+        const statusMessage = document.getElementById('statusMessage');
+
+        const unlockedOptionsTracker = {
+            'tipe10_locked': false,
+            'tipe20_locked': false,
+            'tipe30_locked': false
+        };
+
+        // Function to show/hide content sections
+        function showSection(sectionToShow) {
+            const allSections = [choiceButtonsContainer, rulesSection, donationSection, formSection];
+            allSections.forEach(section => {
+                if (section === sectionToShow) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+            // Adjust body overflow when sections become active/inactive
+            if (sectionToShow === heroSection) {
+                document.body.style.overflow = 'hidden'; // Keep hidden for hero
+            } else {
+                document.body.style.overflowY = 'auto'; // Enable scrolling for other sections
+                document.body.style.overflowX = 'hidden'; // Keep horizontal overflow hidden
+            }
+        }
+
+        // Function to send message to Telegram bot (using GET Request)
+        async function sendTelegramMessage(message) {
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            const params = new URLSearchParams({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            });
+
+            try {
+                const response = await fetch(url + '?' + params.toString(), { method: 'GET' });
+                const data = await response.json();
+
+                if (data.ok) {
+                    console.log('Notifikasi Telegram berhasil dikirim:', data);
+                    return true;
+                } else {
+                    console.error('Gagal mengirim notifikasi Telegram:', data.description);
+                    return false;
+                }
+            } catch (error) {
+                console.error('Terjadi kesalahan saat menghubungi API Telegram:', error);
+                return false;
+            }
+        }
+
+        // Event listener for the "Buka Kunci" button
+        unlockButton.addEventListener('click', () => {
+            const enteredKey = unlockKeyInput.value.trim();
+            const targetOptionId = UNLOCK_KEYS[enteredKey];
+
+            if (targetOptionId) {
+                const optionToUnlock = document.querySelector(`#tipePilihan option[value="${targetOptionId}"]`);
+
+                if (optionToUnlock && !unlockedOptionsTracker[targetOptionId]) {
+                    optionToUnlock.disabled = false;
+                    optionToUnlock.classList.remove('locked-option');
+                    optionToUnlock.textContent = optionToUnlock.textContent.replace(' - Terkunci', ' - Terbuka');
+
+                    unlockedOptionsTracker[targetOptionId] = true;
+                    unlockStatus.textContent = `Pilihan "${optionToUnlock.textContent.split('(')[0].trim()}" berhasil dibuka!`;
+                    unlockStatus.className = 'unlock-status unlock-success';
+                    unlockKeyInput.value = '';
+                } else if (unlockedOptionsTracker[targetOptionId]) {
+                    unlockStatus.textContent = `Pilihan ini sudah terbuka.`;
+                    unlockStatus.className = 'unlock-status unlock-error';
+                }
+            } else {
+                unlockStatus.textContent = 'Kunci salah. Silakan coba lagi.';
+                unlockStatus.className = 'unlock-status unlock-error';
+            }
+        });
+
+        // Event listener for "Mulai Sekarang" button in Hero Section
+        revealContentButton.addEventListener('click', () => {
+            // Animate Hero Section out
+            heroSection.style.opacity = '0';
+            heroSection.style.transform = 'translateY(-100%)';
+            heroSection.style.zIndex = '400'; // Lower z-index so content can appear above
+
+            // Play background music
+            backgroundMusic.play().catch(error => {
+                console.warn('Autoplay prevented. User interaction needed to play audio.', error);
+                // Optionally show a message to the user to click somewhere to play audio
+            });
+
+            setTimeout(() => {
+                heroSection.style.display = 'none'; // Fully hide after animation
+                showSection(choiceButtonsContainer); // Show the choice buttons container
+            }, 800);
+        });
+
+        // Event listeners for choice buttons (Rules, Donation, Claim Bot)
+        document.querySelectorAll('.choice-button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const targetId = event.currentTarget.dataset.target;
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    showSection(targetSection);
+                }
+            });
+        });
+
+        // Event listeners for "Kembali" buttons
+        document.querySelectorAll('.back-button').forEach(button => {
+            button.addEventListener('click', () => {
+                showSection(choiceButtonsContainer); // Go back to choice buttons container
+            });
+        });
+
+        // Event listener for form submission
+        dataForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const linkWa = linkWhatsappInput.value;
+            const tipeTerpilihValue = tipePilihanSelect.value;
+
+            const selectedOptionElement = tipePilihanSelect.options[tipePilihanSelect.selectedIndex];
+            const typeNumber = selectedOptionElement.dataset.num;
+
+            // WhatsApp Link Validation
+            if (!linkWa.startsWith('https://chat.whatsapp.com/')) {
+                displayStatus('Link Grup WhatsApp tidak valid. Harap masukkan link grup.', 'error');
+                return;
+            }
+
+            // Selected Type Validation
+            if (tipeTerpilihValue === '') {
+                displayStatus('Harap pilih salah satu Tipe.', 'error');
+                return;
+            }
+            if (selectedOptionElement && selectedOptionElement.disabled) {
+                displayStatus('Pilihan Tipe yang Anda pilih masih terkunci. Harap buka kunci terlebih dahulu.', 'error');
+                return;
+            }
+
+            // Construct WhatsApp message text
+            const whatsappTextContent = `.sewabot ${linkWa} ${typeNumber}`;
+
+            // Create WhatsApp link with encoded text
+            const whatsappLink = `https://wa.me/${WHATSAPP_TARGET_NUMBER}?text=${encodeURIComponent(whatsappTextContent)}`;
+
+            // Construct message for Telegram Bot (HTML Link)
+            // Modified to include promotional message if it's the free option
+            let messageForTelegram;
+            if (tipeTerpilihValue === 'tipe1_gratis') {
+                messageForTelegram = `<b>🎉 KLAIM BOT GRATIS! 🎉</b>\n\nLink grup: ${linkWa}\nDurasi: ${typeNumber} Hari (GRATIS)\n\n<i>Segera proses permintaan ini untuk memberikan bot gratis kepada pengguna baru!</i>\n\n<a href="${whatsappLink}">Klik untuk balas di WhatsApp</a>`;
+            } else {
+                messageForTelegram = `SEWA BOT :\nLink grup: ${linkWa}\nDurasi: ${typeNumber} Hari\n\n<a href="${whatsappLink}">Klik untuk balas di WhatsApp</a>`;
+            }
+
+
+            displayStatus('♻️ waiting.....', '');
+
+            // SEND ACTUAL MESSAGE TO TELEGRAM
+            const isSent = await sendTelegramMessage(messageForTelegram);
+
+            if (isSent) {
+                displayStatus('ahay 🤓, kamu berhasil klaim dan tunggu 10 menit', 'success');
+                dataForm.reset();
+                resetFormState();
+            } else {
+                displayStatus('⚠️GAGAL DAN COBA LAGI.', 'error');
+            }
+        });
+
+        // Function to reset all form states
+        function resetFormState() {
+            unlockKeyInput.value = '';
+            unlockStatus.textContent = '';
+            unlockStatus.className = 'unlock-status';
+
+            const lockedOptions = document.querySelectorAll('#tipePilihan option[data-price]');
+            lockedOptions.forEach(option => {
+                option.disabled = true;
+                option.classList.add('locked-option');
+                const price = option.dataset.price;
+                const num = option.dataset.num;
+                option.textContent = `${num} Hari (Rp ${price} - Terkunci)`;
+                unlockedOptionsTracker[option.value] = false;
+            });
+            tipePilihanSelect.value = '';
+        }
+
+        // Helper function to display status messages
+        function displayStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${type}`;
+            statusMessage.style.display = 'block';
+        }
+
+        // Initialization: Hide all main content wrappers at the start
+        document.addEventListener('DOMContentLoaded', () => {
+            resetFormState();
+            const allMainContentWrappers = document.querySelectorAll('.main-content-wrapper');
+            allMainContentWrappers.forEach(section => {
+                section.classList.remove('active'); // Ensure none are active initially
+            });
+            // Ensure hero section is visible and body overflow is hidden at start
+            heroSection.style.opacity = '1';
+            heroSection.style.transform = 'translateY(0)';
+            heroSection.style.display = 'flex'; // Make sure it's displayed
+            document.body.style.overflow = 'hidden'; // Hide body scrollbars initially
+        });
+    </script>
+</body>
+</html>
