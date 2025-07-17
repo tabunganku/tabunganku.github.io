@@ -9,9 +9,10 @@
 username: "ica",
 namaAsli: "Ica",
 password: "icagemoy321",
-saldo: 119435,
+saldo: 128230,
 riwayat: [
 
+{ tanggal: "2025-07-17 12:15", jumlah: 8795, jenis: "masuk" },
 { tanggal: "2025-07-16 22:56", jumlah: 2000, jenis: "masuk" },
 { tanggal: "2025-07-16 15:36", jumlah: 2000, jenis: "masuk" },
 { tanggal: "2025-07-16 10:05", jumlah: 1440, jenis: "masuk" },
