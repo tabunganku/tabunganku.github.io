@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dana Kaget Nara Zaen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta property="og:title" content="🎉 Ambil Dana Kagetmu Sekarang di Nara Zaen! 🎉">
+    <meta property="og:description" content="Jangan lewatkan kesempatan emas! Klaim Dana Kaget eksklusifmu sekarang juga sebelum kehabisan. Klik dan raih keberuntunganmu!">
+    <meta property="og:image" content="https://autoresbot.com/tmp_files/c642f25a-ff3d-4eeb-a5bc-6c746d652acc.jpg">
+    <meta property="og:url" content="YOUR_WEBSITE_URL_HERE"> <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Nara Zaen Dana Kaget">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🎉 Ambil Dana Kagetmu Sekarang di Nara Zaen! 🎉">
+    <meta name="twitter:description" content="Jangan lewatkan kesempatan emas! Klaim Dana Kaget eksklusifmu sekarang juga sebelum kehabisan. Klik dan raih keberuntunganmu!">
+    <meta name="twitter:image" content="https://autoresbot.com/tmp_files/491f4b09-597d-4617-975c-45a07e9116e4.jpg">
+    <style>
+        /* Gaya Umum */
+        html, body {
+            height: 100%; /* Ensure html and body take full height for fullscreen video */
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars initially for hero section */
+        }
+        body {
+            font-family: 'Nunito', sans-serif;
+            padding-top: 70px;
+            background-color: transparent; /* Changed to transparent to show video background */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Fullscreen Video Background for the entire page */
+        #fullscreen-background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures video covers the entire area */
+            z-index: -1000; /* Place far behind all content */
+            pointer-events: none; /* Allows clicks to pass through to elements beneath */
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: transparent; /* Changed to transparent */
+            padding: 0; /* Remove padding to make video fill exactly */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            animation: slideInDown 0.8s ease-out;
+            height: 70px; /* Set a fixed height for the navbar */
+            overflow: hidden; /* Hide overflow of the video */
+        }
+        .navbar .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8em;
+            color: #fff;
+            text-decoration: none;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            position: relative; /* Ensure logo stays above video */
+            z-index: 10; /* Bring logo to front */
+            padding: 0 30px; /* Add padding back for logo */
+            background-color: rgba(0,0,0,0.2); /* Slight background for readability */
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-links {
+            /* Block ini sekarang kosong karena tidak ada teks lagi */
+            display: none; /* Hide the entire navbar-links container */
+        }
+
+        /* Navbar Video Background */
+        #navbar-video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This is key for precision */
+            z-index: -1; /* Place behind other content */
+        }
+
+        /* Hero Section (Konten Awal) */
+        .hero-section {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: center;
+            overflow: hidden;
+            z-index: 990;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            background-color: transparent; /* Changed to transparent to show main background video */
+        }
+        #hero-video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            background-size: cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 150, 136, 0.6); /* Warna tosca transparan */
+            z-index: -1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            max-width: 700px;
+            box-sizing: border-box;
+        }
+        .hero-content h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        .hero-content p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+        .hero-content .cute-icon {
+            font-size: 3em;
+            color: #ffe000;
+            animation: bounce 2s infinite;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .reveal-button {
+            background-color: #007bff; /* Biru terang */
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease, transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 0 5px 15px rgba(0,123,255,0.4);
+            animation: popIn 1s ease-out 1s forwards;
+            opacity: 0;
+        }
+        .reveal-button:hover {
+            background-color: #0056b3; /* Biru lebih gelap */
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,123,255,0.6);
+        }
+
+        /* Base style untuk semua section yang bisa muncul */
+        .main-content-wrapper {
+            background-color: transparent; /* Changed to transparent to show main background video */
+            padding: 60px 0;
+            flex-grow: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            position: absolute; /* Changed to absolute to float over background video */
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100vh;
+            padding-top: 70px;
+            box-sizing: border-box;
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .main-content-wrapper.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+            pointer-events: auto;
+            position: relative; /* Changed back to relative when active to allow scrolling */
+            overflow-y: auto; /* Enable scrolling when active */
+        }
+
+        /* Konten dalam wrapper, untuk centering dan styling */
+        .content-inner {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0px auto;
+            color: white;
+            background-color: transparent; /* Semi-transparent background for readability */
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Added subtle shadow */
+            text-align: center;
+            border: none;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        /* Container untuk Tombol Pilihan */
+        .choice-buttons-container h2 {
+            font-family: 'Pacifico', cursive;
+            color: #007bff; /* Biru terang */
+            font-size: 2.8em;
+            margin-bottom: 25px;
+        }
+        .choice-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .choice-button {
+            width: 100%;
+            /* Changed to sky blue */
+            background-color: #87CEEB; /* Sky blue */
+            color: white;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease, transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-sizing: border-box;
+            /* Hide by default */
+            display: none;
+        }
+        .choice-button.active {
+            display: flex; /* Show when active */
+        }
+        .choice-button:hover {
+            /* Darker shade of sky blue for hover */
+            background-color: #6495ED; /* Cornflower blue */
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Password input styles */
+        .password-input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 20px;
+        }
+
+        .password-input-group input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #87CEEB; /* Sky blue border */
+            border-radius: 15px;
+            font-size: 1.1em;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .password-input-group input[type="password"]:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        .password-input-group button {
+            background-color: #28a745; /* Green for check */
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,166,66,0.3);
+        }
+
+        .password-input-group button:hover {
+            background-color: #218838; /* Darker green */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,166,66,0.5);
+        }
+
+        .password-message {
+            margin-top: 15px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #ffc107; /* Warning color */
+        }
+
+        /* Animasi */
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            70% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes rotateAndScale {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            .navbar {
+                padding: 0; /* Remove padding */
+                height: 60px; /* Adjust height for smaller screens */
+            }
+            .navbar .logo {
+                font-size: 1.4em;
+                padding: 0 15px; /* Adjust padding for logo */
+            }
+            .navbar-links {
+                padding: 0 15px; /* Adjust padding for links */
+            }
+            .navbar-links a {
+                margin-left: 10px;
+                font-size: 0.8em;
+            }
+            .hero-section {
+                height: 100vh;
+            }
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+            .hero-content p {
+                font-size: 1.1em;
+            }
+            .reveal-button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+            .content-inner {
+                margin: 20px 10px;
+                padding: 25px 15px;
+            }
+            .choice-buttons-grid {
+                grid-template-columns: 1fr;
+            }
+            .choice-button {
+                max-width: 100%;
+                padding: 15px 20px;
+                font-size: 1.1em;
+            }
+            .content-display-section h2,
+            .form-content-section h2 {
+                font-size: 2em;
+            }
+            .content-display-section p, .content-display-section ul {
+                font-size: 1em;
+                padding: 0 5px;
+            }
+            .form-group label {
+                font-size: 0.9em;
+            }
+            input,
+            select,
+            .lock-input-group input,
+            .lock-input-group button {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+            button,
+            .donation-link-button {
+                font-size: 1em;
+                padding: 12px 25px;
+            }
+            .lock-input-group {
+                flex-direction: column;
+            }
+            .lock-input-group input,
+            .lock-input-group button {
+                width: 100%;
+                border-radius: 12px;
+                margin-bottom: 10px;
+                border-right: 2px solid #81d4fa;
+            }
+            .lock-input-group button {
+                margin-top: 5px;
+            }
+            .password-input-group {
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2em;
+            }
+            .hero-content p {
+                font-size: 0.9em;
+            }
+            .reveal-button {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+            .choice-button {
+                font-size: 1em;
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="fullscreen-background-video">
+        <source src="https://files.catbox.moe/wavi61.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="navbar">
+        <video autoplay muted loop id="navbar-video-background">
+            <source src="https://files.catbox.moe/1116k0.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+
+        <div class="navbar-links" style="display: none;">
+            </div>
+    </div>
+
+    <div class="hero-section" id="heroSection">
+        <video autoplay muted loop id="hero-video-background">
+            <source src="https://c.top4top.io/m_3485qwz800.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <i class="fas fa-gift cute-icon"></i>
+            <h1>Selamat Datang di Dunia Dana Kaget!</h1>
+            <p>Raih kesempatan untuk mendapatkan kejutan Dana Kaget eksklusif setiap hari. Klik tombol di bawah untuk memulai!
+            </p>
+            <button class="reveal-button" id="revealContentButton">Mulai Sekarang! 🚀</button>
+        </div>
+    </div>
+
+    <audio id="backgroundMusic" src="https://files.catbox.moe/i01crz.mp3" preload="auto"></audio>
+
+    <div class="main-content-wrapper" id="choiceButtonsContainer">
+        <div class="content-inner">
+            <div class="choice-buttons-grid">
+                <a href="https://link.dana.id/danakaget?c=s4xeyzqqq&r=cAYM8h&orderId=20250718101214224315010300166998232070324" target="_blank" class="choice-button" id="danaKagetBtn1"><i class="fas fa-gift"></i> DAGET AHAY 🤓</a>
+                <a href="https://link.dana.id/danakaget?c=sfunt7tt6&r=cAYM8h&orderId=20250718101214181115010300166998232058196" target="_blank" class="choice-button" id="danaKagetBtn2"><i class="fas fa-gift"></i> DAGET SKUYY</a>
+                <a href="https://link.dana.id/danakaget?c=s7jyagury&r=cAYM8h&orderId=20250718101214881115010300166998231967696" target="_blank" class="choice-button" id="danaKagetBtn3"><i class="fas fa-gift"></i> NAILONG DAGET</a>
+            </div>
+            
+            <div class="password-input-group" id="passwordInputGroup">
+                <input type="password" id="passwordInput" placeholder="Masukkan Sandi Jumber">
+                <button id="checkPasswordBtn">KLAIM JUMBER</button>
+                <p class="password-message" id="passwordMessage"></p>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // JavaScript to handle hero section and content reveal
+    document.addEventListener('DOMContentLoaded', () => {
+        const revealButton = document.getElementById('revealContentButton');
+        const heroSection = document.getElementById('heroSection');
+        const choiceButtonsContainer = document.getElementById('choiceButtonsContainer');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+
+        const passwordInputGroup = document.getElementById('passwordInputGroup');
+        const passwordInput = document.getElementById('passwordInput');
+        const checkPasswordBtn = document.getElementById('checkPasswordBtn');
+        const passwordMessage = document.getElementById('passwordMessage');
+
+        const danaKagetBtn1 = document.getElementById('danaKagetBtn1');
+        const danaKagetBtn2 = document.getElementById('danaKagetBtn2');
+        const danaKagetBtn3 = document.getElementById('danaKagetBtn3');
+
+        // Define passwords and their corresponding buttons
+        const passwords = {
+            "dagetskuy": danaKagetBtn2, // Sandi 1 to show DAGET SKUYY
+            "dagetahay": danaKagetBtn1, // Sandi 2 to show DAGET AHAY
+            "nailongdaget": danaKagetBtn3  // Sandi 3 to show NAILONG DAGET
+        };
+
+        // Initially hide all Dana Kaget buttons
+        danaKagetBtn1.style.display = 'none';
+        danaKagetBtn2.style.display = 'none';
+        danaKagetBtn3.style.display = 'none';
+
+        // Play music once user interacts
+        let hasInteracted = false;
+        const playMusic = () => {
+            if (!hasInteracted) {
+                backgroundMusic.play().catch(e => console.log("Audio play prevented:", e));
+                backgroundMusic.volume = 0.3; // Set initial volume
+                hasInteracted = true;
+            }
+        };
+
+        // Add event listeners for interaction to play music
+        document.body.addEventListener('click', playMusic, { once: true });
+        document.body.addEventListener('keydown', playMusic, { once: true });
+
+        revealButton.addEventListener('click', () => {
+            heroSection.style.opacity = '0';
+            heroSection.style.transform = 'translateY(-100%)';
+
+            setTimeout(() => {
+                heroSection.style.display = 'none';
+                choiceButtonsContainer.classList.add('active');
+                // Ensure password input group is visible when content container is active
+                passwordInputGroup.style.display = 'flex';
+            }, 800); // Match transition duration
+        });
+
+        checkPasswordBtn.addEventListener('click', () => {
+            const enteredPassword = passwordInput.value.toLowerCase().trim(); // Convert to lowercase and trim for consistency
+            let found = false;
+
+            // Hide all buttons first to ensure only the correct one is shown
+            danaKagetBtn1.style.display = 'none';
+            danaKagetBtn2.style.display = 'none';
+            danaKagetBtn3.style.display = 'none';
+
+            for (const password in passwords) {
+                if (enteredPassword === password) {
+                    passwords[password].style.display = 'flex'; // Show the corresponding button
+                    passwordMessage.textContent = 'Sandi Benar! Selamat mengambil Dana Kagetmu!';
+                    passwordMessage.style.color = '#28a745'; // Green for success
+                    found = true;
+                    passwordInput.value = ''; // Clear input field
+                    break;
+                }
+            }
+
+            if (!found) {
+                passwordMessage.textContent = 'Sandi salah. Coba lagi!';
+                passwordMessage.style.color = '#dc3545'; // Red for error
+            }
+        });
+
+        // Optional: Allow pressing Enter key to check password
+        passwordInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                checkPasswordBtn.click();
+            }
+        });
+    });
+</script>
+</body>
+</html>
