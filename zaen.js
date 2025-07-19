@@ -49,9 +49,10 @@ riwayat: [
 username: "2912244444",
 namaAsli: "Rahma",
 password: "rahma0106",
-saldo: 115000,
+saldo: 120000,
 riwayat: [
 
+{ tanggal: "2025-07-19 07:45", jumlah: 5000, jenis: "masuk" },
 { tanggal: "2025-07-17 06:28", jumlah: 10000, jenis: "masuk" },
 { tanggal: "2025-07-15 19:38", jumlah: 5000, jenis: "masuk" },
 { tanggal: "2025-07-13 13:49", jumlah: 50000, jenis: "masuk" },
