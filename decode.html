@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoder Kayu Imut Salju</title>
+    <style>
+        /* CSS untuk tampilan tembok kayu, navbar, konten, dan salju */
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap'); /* Font untuk judul */
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Mencegah scroll horizontal yang tidak diinginkan */
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: url('https://www.transparenttextures.com/patterns/wood-pattern.png'); /* Tekstur kayu */
+            background-color: #a87e5b; /* Warna fallback jika gambar tidak dimuat */
+            background-size: cover; /* Pastikan gambar menutupi seluruh area */
+            background-attachment: fixed; /* Gambar tidak ikut scroll */
+            display: flex;
+            flex-direction: column; /* Ubah ke kolom untuk navbar di atas */
+            justify-content: flex-start; /* Mulai dari atas */
+            align-items: center;
+            min-height: 100vh;
+            padding: 0; /* Hapus padding body agar navbar menempel */
+            box-sizing: border-box;
+            position: relative; /* Penting untuk posisi salju */
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            height: 80px; /* Tinggi navbar, bisa disesuaikan */
+            background-color: #6a0572; /* Warna ungu gelap */
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex; /* Untuk menengahkan judul */
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Pastikan konten tidak keluar */
+        }
+
+        .navbar h1 {
+            font-family: 'Cabin Sketch', cursive;
+            margin: 0;
+            font-size: clamp(2em, 6vw, 2.5em); /* Ukuran font judul navbar responsif */
+            color: #ffe082;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            padding: 30px 20px;
+            border-radius: 25px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            width: calc(100% - 40px);
+            max-width: 450px;
+            text-align: center;
+            margin: 40px auto;
+            animation: bounceIn 0.8s ease-out;
+            position: relative;
+            overflow: hidden; /* Tetap hidden untuk partikel tombol */
+            box-sizing: border-box;
+
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+
+        /* Animasi masuk */
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Font-size relatif agar menyesuaikan layar */
+        body { font-size: 16px; } /* Base font size */
+        label { font-size: clamp(0.9em, 2.5vw, 1.1em); }
+        textarea { font-size: clamp(0.9em, 2.5vw, 1em); }
+        .decode-buttons-container button { font-size: clamp(1em, 2.8vw, 1.1em); padding: 10px 15px; }
+        .link-buttons-container .link-button { font-size: clamp(0.85em, 2.2vw, 0.95em); padding: 8px 15px; }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0bbe4;
+            border-radius: 15px;
+            box-sizing: border-box;
+            resize: vertical;
+            min-height: 100px;
+            transition: all 0.3s ease;
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        textarea:focus {
+            border-color: #957dad;
+            box-shadow: 0 0 0 3px rgba(149, 125, 173, 0.3);
+        }
+
+        .decode-buttons-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .decode-buttons-container button {
+            background-color: #88d8b0;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 700;
+            flex: 1;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 10px rgba(136, 216, 176, 0.3);
+            transform: translateY(0);
+        }
+
+        .decode-buttons-container button:hover {
+            background-color: #6ac497;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(136, 216, 176, 0.4);
+        }
+
+        .decode-buttons-container button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 8px rgba(136, 216, 176, 0.3);
+        }
+
+        .result-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed #e0bbe4;
+            text-align: left;
+        }
+
+        .result-section label {
+            margin-bottom: 12px;
+            color: #6a0572;
+        }
+
+        #decodedPlainText {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0bbe4;
+            border-radius: 15px;
+            background-color: rgba(247, 240, 254, 0.7);
+            min-height: 100px;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            font-size: 1em;
+            color: #333;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .link-buttons-container {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .link-buttons-container .link-button {
+            background-color: #ffae61;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(255, 174, 97, 0.3);
+            transform: translateY(0);
+        }
+
+        .link-buttons-container .link-button:hover {
+            background-color: #ff8c42;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 174, 97, 0.4);
+        }
+
+        .link-buttons-container .link-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(255, 174, 97, 0.3);
+        }
+
+        .error-message {
+            color: #dc3545;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        /* Animasi partikel tombol (tetap ada) */
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFadeOut 3s infinite ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes particleFadeOut {
+            0% {
+                transform: scale(0) translateY(0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.5) translateY(-50px);
+                opacity: 0;
+            }
+        }
+
+        /* --- Gaya untuk Partikel Salju --- */
+        .snowflake {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8); /* Putih semi-transparan */
+            border-radius: 50%;
+            pointer-events: none; /* Agar tidak menghalangi klik */
+            animation-name: fall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            z-index: -2; /* Di bawah semua konten lain, termasuk tekstur kayu */
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="snow-container"></div>
+
+    <div class="navbar">
+        <h1>✨ Decode Zaen ✨</h1>
+    </div>
+
+    <div class="container" id="mainContainer">
+        <div class="input-group">
+            <label for="encodedInput">Masukkan Teks untuk Dekode:</label>
+            <textarea id="encodedInput" rows="5" placeholder="Masukkan teks Base32 atau Base64 di sini"></textarea>
+        </div>
+        <div class="decode-buttons-container">
+            <button id="decodeBase32Button">Dekode Base32</button>
+            <button id="decodeBase64Button">Dekode Base64</button>
+        </div>
+            <div class="link-buttons-container" id="linkButtonsContainer">
+                </div>
+        <div class="result-section">
+            <div class="input-group">
+                <label>Teks Asli Hasil Dekode:</label>
+                <div id="decodedPlainText">
+                    </div>
+            </div>
+        </div>
+        <p id="errorMessage" class="error-message"></p>
+    </div>
+
+    <script src="https://unpkg.com/hi-base32@0.5.1/build/base32.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const encodedInput = document.getElementById('encodedInput');
+            const decodedPlainText = document.getElementById('decodedPlainText');
+            const linkButtonsContainer = document.getElementById('linkButtonsContainer');
+            const decodeBase32Button = document.getElementById('decodeBase32Button');
+            const decodeBase64Button = document.getElementById('decodeBase64Button');
+            const errorMessage = document.getElementById('errorMessage');
+            const mainContainer = document.getElementById('mainContainer');
+            const snowContainer = document.getElementById('snow-container'); // Tambahkan ini
+
+            function clearResults() {
+                errorMessage.textContent = '';
+                decodedPlainText.textContent = '';
+                linkButtonsContainer.innerHTML = '';
+            }
+
+            function createLinkButtons(text) {
+                const urlRegex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
+
+                let match;
+                const foundLinks = new Set();
+
+                while ((match = urlRegex.exec(text)) !== null) {
+                    let url = match[0];
+                    if (!url.match(/^[a-zA-Z]+:\/\//)) {
+                        url = 'http://' + url;
+                    }
+                    foundLinks.add(url);
+                }
+
+                const danaKagetLinks = [];
+                const shopeePayLinks = [];
+                const goPayLinks = [];
+                const otherLinks = [];
+
+                foundLinks.forEach(link => {
+                    const lowerCaseLink = link.toLowerCase();
+                    if (lowerCaseLink.includes('dana.id') && lowerCaseLink.includes('kaget')) {
+                        danaKagetLinks.push(link);
+                    } else if (lowerCaseLink.includes('shopeepay.co.id') || lowerCaseLink.includes('shopee.co.id/u/')) {
+                        shopeePayLinks.push(link);
+                    } else if (lowerCaseLink.includes('gopay.co.id') || lowerCaseLink.includes('gojek.link/') || lowerCaseLink.includes('link.dana.id/')) {
+                        goPayLinks.push(link);
+                    } else {
+                        otherLinks.push(link);
+                    }
+                });
+
+                function addButtons(linksArray, prefix) {
+                    let counter = 1;
+                    linksArray.forEach(link => {
+                        const button = document.createElement('a');
+                        button.href = link;
+                        button.textContent = `${prefix} ${counter}`;
+                        button.target = '_blank';
+                        button.rel = 'noopener noreferrer';
+                        button.classList.add('link-button');
+                        linkButtonsContainer.appendChild(button);
+                        counter++;
+                    });
+                }
+
+                addButtons(danaKagetLinks, 'Dana Kaget');
+                addButtons(shopeePayLinks, 'Shopee');
+                addButtons(goPayLinks, 'GoPay');
+                addButtons(otherLinks, 'Link');
+            }
+
+            // Fungsi partikel tombol (tetap ada)
+            function createParticle(x, y) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 8 + 4;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                mainContainer.appendChild(particle);
+
+                particle.addEventListener('animationend', () => {
+                    particle.remove();
+                });
+            }
+
+            function animateButtonPress(event) {
+                const buttonRect = event.target.getBoundingClientRect();
+                const centerX = buttonRect.left + buttonRect.width / 2;
+                const centerY = buttonRect.top + buttonRect.height / 2;
+
+                for (let i = 0; i < 5; i++) {
+                    const randomX = centerX + (Math.random() - 0.5) * buttonRect.width * 0.5;
+                    const randomY = centerY + (Math.random() - 0.5) * buttonRect.height * 0.5;
+                    createParticle(randomX, randomY);
+                }
+            }
+
+            // --- Fungsi untuk Animasi Salju ---
+            function createSnowflake() {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                const size = Math.random() * 5 + 2; // Ukuran 2px hingga 7px
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+                snowflake.style.left = `${Math.random() * 100}vw`; // Posisi horizontal acak
+                snowflake.style.animationDuration = `${Math.random() * 3 + 5}s`; // Durasi jatuh 5-8 detik
+                snowflake.style.animationDelay = `${Math.random() * 2}s`; // Delay acak untuk variasi
+                snowflake.style.opacity = Math.random() * 0.5 + 0.5; // Opasitas 0.5 - 1
+                snowContainer.appendChild(snowflake);
+
+                // Hapus kepingan salju setelah selesai animasi untuk efisiensi
+                snowflake.addEventListener('animationend', () => {
+                    snowflake.remove();
+                });
+            }
+
+            // Buat kepingan salju secara berkala
+            setInterval(createSnowflake, 200); // Setiap 200ms buat satu keping salju baru
+
+            // Event Listeners tombol decode (tetap sama)
+            decodeBase32Button.addEventListener('click', (event) => {
+                clearResults();
+                animateButtonPress(event);
+                const textToDecode = encodedInput.value.trim();
+
+                if (!textToDecode) {
+                    errorMessage.textContent = 'Silakan masukkan teks Base32 untuk didecode.';
+                    return;
+                }
+
+                try {
+                    const decodedText = base32.decode(textToDecode);
+                    decodedPlainText.textContent = decodedText;
+                    createLinkButtons(decodedText);
+                } catch (error) {
+                    errorMessage.textContent = 'Gagal mendekode Base32. Pastikan teks yang dimasukkan adalah kode Base32 yang valid.';
+                    console.error('Base32 Decoding error:', error);
+                }
+            });
+
+            decodeBase64Button.addEventListener('click', (event) => {
+                clearResults();
+                animateButtonPress(event);
+                const textToDecode = encodedInput.value.trim();
+
+                if (!textToDecode) {
+                    errorMessage.textContent = 'Silakan masukkan teks Base64 untuk didecode.';
+                    return;
+                }
+
+                try {
+                    const decodedText = atob(textToDecode);
+                    decodedPlainText.textContent = decodedText;
+                    createLinkButtons(decodedText);
+                } catch (error) {
+                    errorMessage.textContent = 'Gagal mendekode Base64. Pastikan teks yang dimasukkan adalah kode Base64 yang valid.';
+                    console.error('Base64 Decoding error:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
