@@ -71,8 +71,9 @@ let users = JSON.parse(localStorage.getItem('users')) || [
         username: "ester",
         namaAsli: "Ester Wulandari",
         password: "esterimut123",
-        saldo: 85246,
-        riwayat: [           
+        saldo: 95246,
+        riwayat: [
+            { tanggal: "2025-07-27 15:07", jumlah: 10000, jenis: "masuk" },           
             { tanggal: "2025-07-26 08;:26", jumlah: 6000, jenis: "masuk" },            
             { tanggal: "2025-07-24 13:16", jumlah: 5000, jenis: "masuk" },    
             { tanggal: "2025-07-23 11:12", jumlah: 3449, jenis: "masuk" },        
