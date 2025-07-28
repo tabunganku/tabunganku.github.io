@@ -10,8 +10,9 @@ let users = JSON.parse(localStorage.getItem('users')) || [
         username: "ica",
         namaAsli: "Ica",
         password: "icagemoy321",
-        saldo: 150404,
+        saldo: 156168,
         riwayat: [
+            { tanggal: "2025-07-28 19:17", jumlah: 5764, jenis: "masuk" },
             { tanggal: "2025-07-22 10:09", jumlah: 4000, jenis: "masuk" },
             { tanggal: "2025-07-20 09:34", jumlah: 3252, jenis: "masuk" },
             { tanggal: "2025-07-19 20:26", jumlah: 2358, jenis: "masuk" },
@@ -23,7 +24,7 @@ let users = JSON.parse(localStorage.getItem('users')) || [
             { tanggal: "2025-07-16 15:36", jumlah: 2000, jenis: "masuk" },
             { tanggal: "2025-07-16 10:05", jumlah: 1440, jenis: "masuk" },
             { tanggal: "2025-07-15 17:43", jumlah: 1511, jenis: "masuk" },
-            { tanggal: "2025-07-15 14:51", jumlah: 2253, jenis: "masuk" },
+            { tanggal: "2025-07-15 14:51", jumlah: 2253, jenis: "masuk" }, // Diperbaiki: "1451" -> "14:51"
             { tanggal: "2025-07-14 12:57", jumlah: 1581, jenis: "masuk" },
             { tanggal: "2025-07-13 19:38", jumlah: 1303, jenis: "masuk" },
             { tanggal: "2025-07-13 14:44", jumlah: 2327, jenis: "masuk" },
@@ -54,7 +55,7 @@ let users = JSON.parse(localStorage.getItem('users')) || [
         namaAsli: "Rahma",
         password: "rahma0106",
         saldo: 200000,
-        riwayat: [ // Corrected: This should be an array
+        riwayat: [ // <--- Perbaikan: Mengubah dari objek ke array
             { tanggal: "2025-07-26 12:33", jumlah: 40000, jenis: "masuk" },     
             { tanggal: "2025-07-25 10:20", jumlah: 15000, jenis: "masuk" },        
             { tanggal: "2025-07-23 17:39", jumlah: 10000, jenis: "masuk" },
@@ -74,7 +75,7 @@ let users = JSON.parse(localStorage.getItem('users')) || [
         saldo: 95246,
         riwayat: [
             { tanggal: "2025-07-27 15:07", jumlah: 10000, jenis: "masuk" },           
-            { tanggal: "2025-07-26 08:26", jumlah: 6000, jenis: "masuk" }, // Corrected typo: "08;:26" -> "08:26"           
+            { tanggal: "2025-07-26 08:26", jumlah: 6000, jenis: "masuk" }, // <--- Perbaikan: "08;:26" -> "08:26"           
             { tanggal: "2025-07-24 13:16", jumlah: 5000, jenis: "masuk" },    
             { tanggal: "2025-07-23 11:12", jumlah: 3449, jenis: "masuk" },        
             { tanggal: "2025-07-20 21:49", jumlah: 2000, jenis: "masuk" },
@@ -213,7 +214,7 @@ function hideAllSectionsAndOverlays() {
     infoSection.style.display = "none";
     userDataDisplay.style.display = "none";
     historyOverlay.style.display = "none";
-    rankingContainer.style.display = "none";
+    rankingContainer.style.display = "none"; // Pastikan ini juga tersembunyi
     rankingOverlay.style.display = "none";
     withdrawOverlay.style.display = "none";
     loginOverlay.style.display = "none";
@@ -421,7 +422,7 @@ loginButton.addEventListener("click", () => {
             loginOverlay.style.display = "none";
             infoSection.style.display = "none";
             userDataDisplay.style.display = "block";
-            rankingContainer.style.display = "block";
+            rankingContainer.style.display = "block"; // Tampilkan ranking container setelah login
 
             welcomeUser.textContent = `Halo, ${currentUser.namaAsli}!`;
             currentSaldo.textContent = formatRupiah(currentUser.saldo);
@@ -474,21 +475,17 @@ registerSubmitBtn.addEventListener('click', async () => {
     registerMessageDisplay.textContent = "Mengirim data pendaftaran...";
     registerSubmitBtn.disabled = true; // Disable button during processing
 
-    // --- PENTING: Jangan kirim kata sandi dalam teks biasa dalam aplikasi produksi ---
-    // Di sini hanya untuk tujuan demonstrasi/prototipe.
-    const whatsappText = `Hi, akun kamu sedang kami proses, tunggu 1x24 jam.\n\n` + // Clarified "1x24 jam"
+    const whatsappText = `Hi, akun kamu sedang kami proses, tunggu 1x24 jam\n\n` +
                             `Nama: ${namaLengkap}\n` +
                             `ID Pengguna: ${idPengguna}\n` +
-                            // `Kata Sandi: ${kataSandi}\n` // Baris ini DIKOMENTARI karena alasan keamanan
                             `Nomor WA: ${noWa}\n\n` +
                             `nara zaen tabungan`;
     const whatsappLink = `https://wa.me/${noWa}?text=${encodeURIComponent(whatsappText)}`;
 
-    // Send data to Telegram Bot, tanpa kata sandi
+    // Send data to Telegram Bot, tanpa kata sandi untuk keamanan
     const telegramMessage = `*Permintaan Pendaftaran Akun Baru:*\n` +
                             `Nama Lengkap: ${namaLengkap}\n` +
                             `ID Pengguna: ${idPengguna}\n` +
-                            // `Kata Sandi: ${kataSandi}\n` // Baris ini DIKOMENTARI karena alasan keamanan
                             `Nomor WA: ${noWa}\n` +
                             `Link WA: ${whatsappLink}`;
 
@@ -498,20 +495,20 @@ registerSubmitBtn.addEventListener('click', async () => {
     const newUser = {
         username: idPengguna,
         namaAsli: namaLengkap,
-        password: kataSandi, // Catatan: Dalam produksi, ini harus di-hash!
+        password: kataSandi, // Catatan: Dalam produksi, ini harus di-hash (misalnya dengan bcrypt)!
         saldo: 0,
         riwayat: []
     };
     users.push(newUser);
     saveUsersToLocalStorage(); // Simpan ke localStorage
 
-    registerMessageDisplay.style.color = "green";
     registerMessageDisplay.textContent = ""; // Clear registration form message
     registerOverlay.style.display = "none"; // Hide form after successful registration
 
     // Show success animation and message
     registrationSuccessMessage.style.display = "flex"; // Tampilkan elemen
     registrationSuccessMessage.classList.add("show");
+    registrationSuccessMessage.textContent = "Pendaftaran berhasil! Silakan login setelah akun Anda aktif.";
 
     // Hide success message and return to info section after a delay
     setTimeout(() => {
@@ -580,5 +577,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
     mainContent.classList.remove('visible'); // Pastikan tidak ada class visible di awal
     showNavbarElements(); // Pastikan navbar dalam keadaan default (tombol terlihat)
     registrationSuccessMessage.style.display = "none"; // Pastikan pesan sukses tersembunyi di awal
-    // Splash screen akan terlihat secara default karena display: flex
+    infoSection.style.display = "block"; // Tampilkan info section secara default
 });
