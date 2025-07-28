@@ -23,7 +23,7 @@ let users = JSON.parse(localStorage.getItem('users')) || [
             { tanggal: "2025-07-16 15:36", jumlah: 2000, jenis: "masuk" },
             { tanggal: "2025-07-16 10:05", jumlah: 1440, jenis: "masuk" },
             { tanggal: "2025-07-15 17:43", jumlah: 1511, jenis: "masuk" },
-            { tanggal: "2025-07-15 14:51", jumlah: 2253, jenis: "masuk" }, // Diperbaiki: "1451" -> "14:51"
+            { tanggal: "2025-07-15 14:51", jumlah: 2253, jenis: "masuk" },
             { tanggal: "2025-07-14 12:57", jumlah: 1581, jenis: "masuk" },
             { tanggal: "2025-07-13 19:38", jumlah: 1303, jenis: "masuk" },
             { tanggal: "2025-07-13 14:44", jumlah: 2327, jenis: "masuk" },
@@ -54,11 +54,11 @@ let users = JSON.parse(localStorage.getItem('users')) || [
         namaAsli: "Rahma",
         password: "rahma0106",
         saldo: 200000,
-        riwayat: 
-        { tanggal: "2025-07-26 12:33", jumlah: 40000, jenis: "masuk" },     
-        { tanggal: "2025-07-25 10:20", jumlah: 15000, jenis: "masuk" },        
-        { tanggal: "2025-07-23 17:39", jumlah: 10000, jenis: "masuk" },
-           { tanggal: "2025-07-22 17:55", jumlah: 5000, jenis: "masuk" },
+        riwayat: [ // Corrected: This should be an array
+            { tanggal: "2025-07-26 12:33", jumlah: 40000, jenis: "masuk" },     
+            { tanggal: "2025-07-25 10:20", jumlah: 15000, jenis: "masuk" },        
+            { tanggal: "2025-07-23 17:39", jumlah: 10000, jenis: "masuk" },
+            { tanggal: "2025-07-22 17:55", jumlah: 5000, jenis: "masuk" },
             { tanggal: "2025-07-20 12:44", jumlah: 10000, jenis: "masuk" },
             { tanggal: "2025-07-19 07:45", jumlah: 5000, jenis: "masuk" },
             { tanggal: "2025-07-17 06:28", jumlah: 10000, jenis: "masuk" },
@@ -74,7 +74,7 @@ let users = JSON.parse(localStorage.getItem('users')) || [
         saldo: 95246,
         riwayat: [
             { tanggal: "2025-07-27 15:07", jumlah: 10000, jenis: "masuk" },           
-            { tanggal: "2025-07-26 08;:26", jumlah: 6000, jenis: "masuk" },            
+            { tanggal: "2025-07-26 08:26", jumlah: 6000, jenis: "masuk" }, // Corrected typo: "08;:26" -> "08:26"           
             { tanggal: "2025-07-24 13:16", jumlah: 5000, jenis: "masuk" },    
             { tanggal: "2025-07-23 11:12", jumlah: 3449, jenis: "masuk" },        
             { tanggal: "2025-07-20 21:49", jumlah: 2000, jenis: "masuk" },
@@ -476,7 +476,7 @@ registerSubmitBtn.addEventListener('click', async () => {
 
     // --- PENTING: Jangan kirim kata sandi dalam teks biasa dalam aplikasi produksi ---
     // Di sini hanya untuk tujuan demonstrasi/prototipe.
-    const whatsappText = `Hi, akun kamu sedang kami proses, tunggu 1x24 jam\n\n` +
+    const whatsappText = `Hi, akun kamu sedang kami proses, tunggu 1x24 jam.\n\n` + // Clarified "1x24 jam"
                             `Nama: ${namaLengkap}\n` +
                             `ID Pengguna: ${idPengguna}\n` +
                             // `Kata Sandi: ${kataSandi}\n` // Baris ini DIKOMENTARI karena alasan keamanan
