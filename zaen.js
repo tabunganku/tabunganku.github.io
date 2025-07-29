@@ -55,8 +55,9 @@ let users = JSON.parse(localStorage.getItem('users')) || [
         username: "2912244444",
         namaAsli: "Rahma",
         password: "rahma0106",
-        saldo: 200000,
+        saldo: 205000,
         riwayat: [ // <--- Perbaikan: Mengubah dari objek ke array
+        { tanggal: "2025-07-29 19:51", jumlah: 5000, jenis: "masuk" },
             { tanggal: "2025-07-26 12:33", jumlah: 40000, jenis: "masuk" },     
             { tanggal: "2025-07-25 10:20", jumlah: 15000, jenis: "masuk" },        
             { tanggal: "2025-07-23 17:39", jumlah: 10000, jenis: "masuk" },
