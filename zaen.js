@@ -10,8 +10,9 @@ let users = JSON.parse(localStorage.getItem('users')) || [
         username: "ica",
         namaAsli: "Ica",
         password: "icagemoy321",
-        saldo: 161168,
+        saldo: 168475,
         riwayat: [
+        { tanggal: "2025-07-31 18:31", jumlah: 7307, jenis: "masuk" },
             { tanggal: "2025-07-29 11:16", jumlah: 5000, jenis: "masuk" },
             { tanggal: "2025-07-28 19:17", jumlah: 5764, jenis: "masuk" },
             { tanggal: "2025-07-22 10:09", jumlah: 4000, jenis: "masuk" },
